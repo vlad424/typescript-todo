@@ -1,0 +1,75 @@
+.left-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    flex-basis: 15%;
+    padding: 1.5%;
+}
+
+/* upper */
+
+.menu-header {
+    display: flex;
+
+    width: 100%;
+
+    flex-grow: 1;
+}
+
+/* middle */
+
+.menu-tasks {
+    display: flex;
+    
+    flex-grow: 5;
+    flex-direction: column;
+}
+.menu-surname {
+    font-size: 18px;
+    color: #535353;
+}
+.menu-current-task {
+
+}
+.menu-task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-left: 5%;    
+
+    font-size: 16px;
+    font-weight: normal;
+
+    transition: 0.3s;
+}
+.menu-task:hover {
+    color: white;
+    background: #EBEBEB;
+
+    .menu-name {
+
+    }
+}
+.menu-value-tasks {
+    width: 1.5em;
+    height: 1.5em;
+
+    border-radius: 7.5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+    background-color: #EAEAEA;
+}
+
+/* footer */
+
+.menu-lists {
+    display: flex;
+
+    flex-grow: 5;
+}
