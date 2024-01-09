@@ -9,7 +9,7 @@ import './MenuLog/menu.css'
 const LeftMenu = () => {
   return (
     <aside className="left-menu">
-      <HeaderMenu/>
+      <HeaderMenu name="Menu"/>
       <TasksMenu/>
       <ListMenu/>
     </aside>

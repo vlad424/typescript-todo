@@ -1,0 +1,10 @@
+.middle-task-area {
+    display: flex;
+
+    flex-direction: column;
+
+    flex-basis: 40%;
+    padding: 1.5%;
+
+    border-right: 1px solid #000;
+}

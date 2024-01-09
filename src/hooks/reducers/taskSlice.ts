@@ -14,6 +14,8 @@ const initialState: ReduxState = {
       todos: [{ name: "make another", desc: "", date: "", _id: 1 }],
     },
   ],
+  
+  selectedTaskArrayID: -1,
 };
 
 export const taskSlice = createSlice({

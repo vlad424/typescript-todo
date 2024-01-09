@@ -1,10 +1,12 @@
 import LeftMenu from "./components/LeftMenu";
+import Task from "./components/Task";
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <LeftMenu/>
-    </div>
+      <Task/>
+    </main>
   );
 }
 
