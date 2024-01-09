@@ -14,6 +14,7 @@
 
     width: 100%;
 
+    min-height: 10%;
     flex-grow: 1;
 }
 
@@ -22,35 +23,38 @@
 .menu-tasks {
     display: flex;
     
-    flex-grow: 5;
+    min-height: 45%;
+    flex-grow: 4;
     flex-direction: column;
 }
 .menu-surname {
     font-size: 18px;
     color: #535353;
 }
-.menu-current-task {
+.menu-current-tasks {
+    display: flex;
+    flex-direction: column;
 
+    margin-left: 5%; 
 }
 .menu-task {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    margin-left: 5%;    
+    align-items: center;
 
     font-size: 16px;
     font-weight: normal;
 
     transition: 0.3s;
 }
+
 .menu-task:hover {
     color: white;
     background: #EBEBEB;
-
-    .menu-name {
-
-    }
+}
+.menu-name {
+    font-weight: normal;
 }
 .menu-value-tasks {
     width: 1.5em;
@@ -65,11 +69,33 @@
     font-size: 12px;
     background-color: #EAEAEA;
 }
+.menu-task-add {
+    display: flex; 
+
+    align-items: center;
+
+    font-size: 16px;
+    font-weight: normal;
+    color: gray;
+}
+.menu-task-add:before {
+    content: '+';
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-right: 5%;
+
+    font-weight: bold;
+    font-size: 18px;
+}
 
 /* footer */
 
 .menu-lists {
     display: flex;
-
-    flex-grow: 5;
+    
+    min-height: 45%;
+    flex-grow: 4;
 }

@@ -1,13 +1,12 @@
 export interface ReduxState {
-    tasks: Array<ArrayTaskType>
+    tasks: Array<IArrayTasks>
 }
-export interface ArrayTaskType {
+export interface IArrayTasks {
     name: string,
-    desc: string,
     _id: number,
-    todos: Array<TaskType>
+    todos: Array<ITask>
 }
-export interface TaskType {
+export interface ITask {
     name: string,
     desc: string,
     date: string,
