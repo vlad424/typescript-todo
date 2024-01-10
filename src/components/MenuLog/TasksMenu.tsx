@@ -20,7 +20,7 @@ const TasksMenu = () => {
             </div>
           );
         })}
-        <button className="menu-task-add" onClick={() => {dispatch(putArrayTask("yesterday"))}}>Add New Task</button>
+        <button className="menu-task-add" onClick={() => {dispatch(putArrayTask("yesterday"))}}>Add New Array</button>
       </div>
     </section>
   );

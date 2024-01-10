@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxState } from "../../types/redux_state";
+import { ITask, ReduxState } from "../../types/redux_state";
 
 const initialState: ReduxState = {
   tasks: [
     {
       name: "today",
       _id: 0,
-      todos: [{ name: "make together", desc: "", date: "", _id: 0 }],
+      todos: [{ name: "make together", desc: "", date: "", _id: 1 }],
     },
     {
       name: "tommorow",
@@ -15,7 +15,7 @@ const initialState: ReduxState = {
     },
   ],
   
-  selectedTaskArrayID: -1,
+  selectedTaskArrayID: 0,
 };
 
 export const taskSlice = createSlice({
@@ -43,9 +43,19 @@ export const taskSlice = createSlice({
           }
         )
       }
-    }
+    },
+    putTask(state, action : PayloadAction<ITask>) {
+      const last_id = state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.at(-1)?._id
 
-    
+      const ready_task : ITask = {
+        name: action.payload.name,
+        desc: action.payload.desc,
+        date: action.payload.date,
+        _id: last_id ? last_id + 1 : 0,
+      }
+
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.push(ready_task)
+    }
   }
 })
 
