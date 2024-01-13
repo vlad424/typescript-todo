@@ -6,12 +6,12 @@ const initialState: ReduxState = {
     {
       name: "today",
       _id: 0,
-      todos: [{ name: "make together", desc: "", date: new Date().toString(), _id: 0 }],
+      todos: [{ name: "make together", desc: "", date: new Date().toString(), _id: 1 }],
     },
     {
       name: "tommorow",
       _id: 1,
-      todos: [{ name: "make another", desc: "", date: new Date().toString(), _id: 0 }],
+      todos: [{ name: "make another", desc: "", date: new Date().toString(), _id: 1 }],
     },
   ],
   
