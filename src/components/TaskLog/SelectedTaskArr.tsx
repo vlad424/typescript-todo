@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 
 const SelectedTaskArr = () => {
+  const [name, setName] = useState<string>("");
+
   const dispatch = useAppDispatch();
   const { putTask } = taskSlice.actions;
 
@@ -16,18 +18,25 @@ const SelectedTaskArr = () => {
   return (
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
-        return <div className="div" key={`MiddleTask: ${el._id}`} >{el.name}</div>;
+        return <div className="task" key={`MiddleTask: ${el._id}`} >{el.name}</div>;
       })}
-      <button
-        className="task-view-add"
-        onClick={() => {
-          dispatch(
-            putTask({ name: "make another", desc: "", date: new Date().toString(), _id: 2 })
-          );
-        }}
-      >
-        Add New Task
-      </button>
+      <div className="add-new-task">
+        <button
+          className="task-view-add"
+          onClick={() => {
+            dispatch(
+              putTask({ name: name, desc: "", date: new Date().toString(), _id: 2 })
+            );
+          }}
+        >
+          +
+        </button>
+        <input 
+          placeholder="add new task"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          />
+      </div>
     </section>
   );
 };

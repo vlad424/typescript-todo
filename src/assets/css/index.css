@@ -27,3 +27,13 @@ button {
     background-color: transparent;
     cursor: pointer;
 }
+input {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
