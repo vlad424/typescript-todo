@@ -3,7 +3,7 @@ import React from "react";
 const HeaderTask = () => {
   return (
     <header className="tasks-header">
-      <h1>{"Nothing :("}</h1>
+      <h1>{"Today"}</h1>
     </header>
   );
 };

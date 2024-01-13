@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 
 const TasksMenu = () => {
-  const {putArrayTask} = taskSlice.actions;
+  const {putArrayTask, changeSelectedArray} = taskSlice.actions;
   const tasks = useAppSelector(state => state.taskReducer.tasks)
 
   const dispatch = useAppDispatch()
@@ -14,7 +14,7 @@ const TasksMenu = () => {
       <div className="menu-current-tasks">
         {tasks.map(el => {
           return(
-            <div className="menu-task" key={`Task: ${el._id}`}>
+            <div className="menu-task" key={`Task: ${el._id}`} onClick={() => dispatch(changeSelectedArray(el._id))}>
               <p className="menu-name">{el.name}</p>
               <p className="menu-value-tasks">{el.todos.length}</p>
             </div>
