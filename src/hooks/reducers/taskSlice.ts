@@ -6,12 +6,12 @@ const initialState: ReduxState = {
     {
       name: "today",
       _id: 0,
-      todos: [{ name: "make together", desc: "", date: "", _id: 1 }],
+      todos: [{ name: "make together", desc: "", date: new Date().toString(), _id: 1 }],
     },
     {
       name: "tommorow",
       _id: 1,
-      todos: [{ name: "make another", desc: "", date: "", _id: 1 }],
+      todos: [{ name: "make another", desc: "", date: new Date().toString(), _id: 1 }],
     },
   ],
   
@@ -50,7 +50,7 @@ export const taskSlice = createSlice({
       const ready_task : ITask = {
         name: action.payload.name,      // name (user input)
         desc: action.payload.desc,      // desc (user input)
-        date: action.payload.date,      // date of creation
+        date: action.payload.date.toString(),      // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
       }
 
@@ -58,7 +58,7 @@ export const taskSlice = createSlice({
     }, // reducer, create a new task ( state.tasks[array_id].todos )
     changeSelectedArray(state, action : PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
-    } // reducer, change selected array of task. 
+    }, // reducer, change selected array of task. 
   }
 })
 

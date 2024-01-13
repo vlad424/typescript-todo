@@ -22,7 +22,7 @@ const SelectedTaskArr = () => {
         className="task-view-add"
         onClick={() => {
           dispatch(
-            putTask({ name: "make another", desc: "", date: "", _id: 2 })
+            putTask({ name: "make another", desc: "", date: new Date().toString(), _id: 2 })
           );
         }}
       >
