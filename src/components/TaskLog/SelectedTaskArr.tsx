@@ -32,6 +32,7 @@ const SelectedTaskArr = () => {
           +
         </button>
         <input 
+          className="task-input"
           placeholder="add new task"
           value={name}
           onChange={e => setName(e.target.value)}
