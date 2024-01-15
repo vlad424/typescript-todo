@@ -16,6 +16,7 @@ const initialState: ReduxState = {
   ],
   
   selectedTaskArrayID: 0,
+  selectedTaskID: 1,
 };
 
 export const taskSlice = createSlice({
@@ -58,7 +59,10 @@ export const taskSlice = createSlice({
     }, // reducer, create a new task ( state.tasks[array_id].todos )
     changeSelectedArray(state, action : PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
-    }, // reducer, change selected array of task. 
+    }, // reducer, change current selected array of task (id)
+    changeSelectedTask(state, action : PayloadAction<number>) {
+      state.selectedTaskID = action.payload;
+    } // reducer, change current selected task (id)
   }
 })
 

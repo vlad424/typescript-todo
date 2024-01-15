@@ -6,9 +6,18 @@
     flex-basis: 40%;
     padding: 1.5%;
 }
+.tasks-header {
+    min-height: 9%;
+}
 .task {
     margin: 1% 0 1% 0;
+    font-size: 18px;
 }
+.tasks-view {
+    display: flex;
+    flex-direction: column;
+}
+
 .add-new-task {
     min-width: 50%;
     max-width: 100%;

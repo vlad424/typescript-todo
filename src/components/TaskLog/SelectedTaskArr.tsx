@@ -6,7 +6,7 @@ const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
 
   const dispatch = useAppDispatch();
-  const { putTask } = taskSlice.actions;
+  const { putTask, changeSelectedTask } = taskSlice.actions;
 
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
@@ -18,25 +18,41 @@ const SelectedTaskArr = () => {
   return (
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
-        return <div className="task" key={`MiddleTask: ${el._id}`} >{el.name}</div>;
+        return (
+          <div
+            className="task"
+            key={`MiddleTask: ${el._id}`}
+            onClick={() => dispatch(changeSelectedTask(el._id))}
+          >
+            {el.name}
+          </div>
+        );
       })}
       <div className="add-new-task">
         <button
           className="task-view-add"
           onClick={() => {
+            name ? 
             dispatch(
-              putTask({ name: name, desc: "", date: new Date().toString(), _id: 2 })
-            );
+              putTask({
+                name: name,
+                desc: "",
+                date: new Date().toString(),
+                _id: 2,
+              })
+            ) 
+            :
+            console.log("incorrect name")
           }}
         >
           +
         </button>
-        <input 
+        <input
           className="task-input"
           placeholder="add new task"
           value={name}
-          onChange={e => setName(e.target.value)}
-          />
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
     </section>
   );

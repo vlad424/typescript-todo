@@ -2,6 +2,7 @@ export interface ReduxState {
     tasks: Array<IArrayTasks>
 
     selectedTaskArrayID: number
+    selectedTaskID: number
 }
 export interface IArrayTasks {
     name: string,

@@ -7,7 +7,7 @@ const HeaderTask = () => {
 
   return (
     <header className="tasks-header">
-      <h1>{header}</h1>
+      <h1>{header ? header : "create a tasks array"}</h1>
     </header>
   );
 };

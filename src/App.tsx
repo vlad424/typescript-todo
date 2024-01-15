@@ -1,4 +1,5 @@
 import LeftMenu from "./components/LeftMenu";
+import RightTaskDesc from "./components/RightTaskDesc";
 import Task from "./components/Task";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <main className="App">
       <LeftMenu/>
       <Task/>
+      <RightTaskDesc/>
     </main>
   );
 }
