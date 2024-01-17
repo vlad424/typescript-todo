@@ -16,12 +16,12 @@ const RightTaskDesc = () => {
     (state) =>
       state.taskReducer.tasks
         .find((el) => el._id === ID_ARRAY)
-        ?.todos.find((el) => el._id === ID_TASK)?.name
+        ?.todos.find((el) => el._id === ID_TASK)
   );
 
   return (
     <aside className="right-side">
-      <HeaderMenu name={task_name ? task_name + ":" : ""} />
+      <HeaderMenu name={task_name?.name ? task_name.name + ":" : ""} />
       <TaskInfo/>
     </aside>
   );

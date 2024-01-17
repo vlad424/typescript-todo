@@ -14,7 +14,27 @@ const TaskInfo = () => {
       ?.todos.find((el) => el._id === ID_TASK)
   );
 
-  return <div className="side-task-info">{task?.desc ? task?.desc : "no description"}</div>;
+  return (
+    <>
+      <div className="side-task-info">
+        <div className="side-task-setting">
+          <textarea className="side-desc-task"
+            placeholder={task?.desc ? task?.desc : "No description"}
+          >
+          </textarea>
+          
+        </div>
+      </div>
+      <div className="side-task-commit-changes">
+        <button className="side-delete-task">
+          delete task
+        </button>
+        <button className="side-save-task">
+          save changes
+        </button>
+      </div>
+    </>
+  );
 };
 
 export default TaskInfo;

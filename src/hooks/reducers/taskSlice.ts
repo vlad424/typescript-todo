@@ -62,7 +62,13 @@ export const taskSlice = createSlice({
     }, // reducer, change current selected array of task (id)
     changeSelectedTask(state, action : PayloadAction<number>) {
       state.selectedTaskID = action.payload;
-    } // reducer, change current selected task (id)
+    }, // reducer, change current selected task (id)
+    deleteTask(state, action: PayloadAction<number>) {
+      
+    },
+    saveChangesTask(state, action: PayloadAction<ITask>) {
+      
+    }
   }
 })
 

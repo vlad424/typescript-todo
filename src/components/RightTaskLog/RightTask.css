@@ -6,3 +6,24 @@
     flex-basis: 40%;
     padding: 1.5%;
 }
+.side-task-info {
+    min-height: 85%;    
+}
+.side-task-setting {
+    width: 100%;
+    height: 100%;
+}
+.side-desc-task {
+    height: 20%;
+    width: 80%;
+    resize: none;
+    
+    font-size: 16px;
+    padding: 2.5px;
+    border-radius: 5px;
+}
+.side-task-commit-changes {
+    display: flex;
+
+    justify-content: space-around;
+}
