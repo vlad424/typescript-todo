@@ -6,70 +6,95 @@ const initialState: ReduxState = {
     {
       name: "today",
       _id: 0,
-      todos: [{ name: "make together", desc: "", date: new Date().toString(), _id: 1 }],
+      todos: [
+        {
+          name: "make together",
+          desc: "",
+          date: new Date().toString(),
+          _id: 1,
+        },
+      ],
     },
     {
       name: "tommorow",
       _id: 1,
-      todos: [{ name: "make another", desc: "", date: new Date().toString(), _id: 1 }],
+      todos: [
+        { name: "make another", desc: "", date: new Date().toString(), _id: 1 },
+      ],
     },
   ],
-  
+
   selectedTaskArrayID: 0,
   selectedTaskID: 1,
 };
 
 export const taskSlice = createSlice({
   name: "task",
-  initialState,  
+  initialState,
   reducers: {
-    putArrayTask(state, action : PayloadAction<string>) {
-      const last_id = state.tasks.at(-1)?._id // last id in arrays
+    putArrayTask(state, action: PayloadAction<string>) {
+      const last_id = state.tasks.at(-1)?._id; // last id in arrays
 
-      if(last_id === undefined) {
-        state.tasks.push(
-          {
-            name: action.payload,
-            _id: 0,
-            todos: []
-          }
-        )
+      if (last_id === undefined) {
+        state.tasks.push({
+          name: action.payload,
+          _id: 0,
+          todos: [],
+        });
       } // if array is null
       else {
-        state.tasks.push(
-          {
-            name: action.payload,
-            _id: last_id + 1,
-            todos: []
-          }
-        )
+        state.tasks.push({
+          name: action.payload,
+          _id: last_id + 1,
+          todos: [],
+        });
       }
     }, // reducer, create a new array of task (state.tasks)
-    putTask(state, action : PayloadAction<ITask>) {
-      const last_id = state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.at(-1)?._id
+    putTask(state, action: PayloadAction<ITask>) {
+      const last_id = state.tasks
+        .find((el) => el._id === state.selectedTaskArrayID)
+        ?.todos.at(-1)?._id;
 
-      const ready_task : ITask = {
-        name: action.payload.name,      // name (user input)
-        desc: action.payload.desc,      // desc (user input)
-        date: action.payload.date.toString(),      // date of creation
+      const ready_task: ITask = {
+        name: action.payload.name, // name (user input)
+        desc: action.payload.desc, // desc (user input)
+        date: action.payload.date.toString(), // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
-      }
+      }; 
 
-      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.push(ready_task)
+      state.tasks
+        .find((el) => el._id === state.selectedTaskArrayID)
+        ?.todos.push(ready_task);
     }, // reducer, create a new task ( state.tasks[array_id].todos )
-    changeSelectedArray(state, action : PayloadAction<number>) {
+    changeSelectedArray(state, action: PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
     }, // reducer, change current selected array of task (id)
-    changeSelectedTask(state, action : PayloadAction<number>) {
+    changeSelectedTask(state, action: PayloadAction<number>) {
       state.selectedTaskID = action.payload;
     }, // reducer, change current selected task (id)
     deleteTask(state, action: PayloadAction<number>) {
+      const selected_arr : any = 
       
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.findIndex((el) => el._id === action.payload) ?
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.findIndex((el) => el._id === action.payload) : 0
+      
+      state.tasks
+         .find((el) => el._id === state.selectedTaskArrayID)
+         ?.todos.splice(
+           selected_arr,
+           1
+        );
     },
     saveChangesTask(state, action: PayloadAction<ITask>) {
+      const changed_obj = 
       
-    }
-  }
-})
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) ? 
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) : 
+      {name: "null", desc: "null", date: "0", _id: 10000}
+
+      console.log(changed_obj?.desc)
+    },
+  },
+});
 
 export default taskSlice.reducer;
