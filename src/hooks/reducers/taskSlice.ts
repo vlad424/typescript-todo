@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ITask, ReduxState } from "../../types/redux_state";
+import { ITask, ITaskSaveAction, ReduxState } from "../../types/redux_state";
 
 const initialState: ReduxState = {
   tasks: [
@@ -85,14 +85,14 @@ export const taskSlice = createSlice({
            1
         );
     },
-    saveChangesTask(state, action: PayloadAction<ITask>) {
+    saveChangesTask(state, action: PayloadAction<ITaskSaveAction>) {
+      console.log(action.payload)
+      
       const changed_obj = 
       
       state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) ? 
       state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) : 
       {name: "null", desc: "null", date: "0", _id: 10000}
-
-      console.log(changed_obj?.desc)
     },
   },
 });

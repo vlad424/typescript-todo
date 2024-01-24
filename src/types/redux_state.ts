@@ -15,3 +15,7 @@ export interface ITask {
     date: string,
     _id: number
 }
+export interface ITaskSaveAction {
+    desc: string,
+    _id: number
+}

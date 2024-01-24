@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { ITask } from "../../types/redux_state";
@@ -26,6 +26,10 @@ const TaskInfo = () => {
     dispatch(deleteTask(type_task._id))
   }
 
+  useEffect(() => {
+    console.log(value_area)
+  }, [value_area])
+
   return (
     <>
       <div className="side-task-info">
@@ -42,7 +46,7 @@ const TaskInfo = () => {
         <button className="side-delete-task" onClick={() => deleteTaskButton()}>
           delete task
         </button>
-        <button className="side-save-task" onClick={() => dispatch(saveChangesTask(task ? task : {name: "", desc: value_area, date: "", _id: 1000000}))}>
+        <button className="side-save-task" onClick={() => dispatch(saveChangesTask(task ? {desc: value_area, _id: task._id} : {desc: "", _id: 1000}))}>
           save changes
         </button>
       </div>
