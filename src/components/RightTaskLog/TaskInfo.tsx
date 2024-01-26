@@ -18,17 +18,20 @@ const TaskInfo = () => {
   const dispatch = useAppDispatch();
   const {deleteTask, saveChangesTask} = taskSlice.actions
   const [value_area, setValue_area] = useState(task?.desc ? task?.desc : "No description")
+  
   const deleteTaskButton = () => {
     const type_task : ITask = task ? task : {name: "", desc: "", date: "", _id: -1}
 
-    console.log(task)
-
     dispatch(deleteTask(type_task._id))
+  }
+  const saveTaskButton = () => {
+
+    dispatch(saveChangesTask(task ? {desc: value_area, _id: task._id} : {desc: "", _id: -1}))
   }
 
   useEffect(() => {
-    console.log(value_area)
-  }, [value_area])
+    setValue_area(task?.desc ? task?.desc : "No description")
+  }, [ID_TASK])
 
   return (
     <>
@@ -46,7 +49,7 @@ const TaskInfo = () => {
         <button className="side-delete-task" onClick={() => deleteTaskButton()}>
           delete task
         </button>
-        <button className="side-save-task" onClick={() => dispatch(saveChangesTask(task ? {desc: value_area, _id: task._id} : {desc: "", _id: 1000}))}>
+        <button className="side-save-task" onClick={() => saveTaskButton()}>
           save changes
         </button>
       </div>

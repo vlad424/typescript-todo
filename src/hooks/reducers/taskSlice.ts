@@ -86,13 +86,11 @@ export const taskSlice = createSlice({
         );
     },
     saveChangesTask(state, action: PayloadAction<ITaskSaveAction>) {
-      console.log(action.payload)
-      
-      const changed_obj = 
-      
-      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) ? 
-      state.tasks.find((el) => el._id === state.selectedTaskArrayID)?.todos.find((el) => el._id === action.payload._id) : 
-      {name: "null", desc: "null", date: "0", _id: 10000}
+      const change : number = state.tasks.find((el) => el._id === state.selectedTaskArrayID)!.todos.findIndex((el) => el._id === action.payload._id) ? 
+
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)!.todos.findIndex((el) => el._id === action.payload._id) : 0
+
+      state.tasks.find((el) => el._id === state.selectedTaskArrayID)!.todos[change].desc = action.payload.desc
     },
   },
 });
