@@ -23,7 +23,7 @@
     max-width: 100%;
     border-radius: 10px;
     padding: 5px;
-    border: 1px solid #000;
+    border: 1px solid rgb(210, 210, 210);
 }
 .task-view-add {
     width: 10%;

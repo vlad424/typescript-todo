@@ -4,7 +4,7 @@ import { ITask, ITaskSaveAction, ReduxState } from "../../types/redux_state";
 const initialState: ReduxState = {
   tasks: [
     {
-      name: "today",
+      name: "Today",
       _id: 0,
       todos: [
         {
@@ -16,7 +16,7 @@ const initialState: ReduxState = {
       ],
     },
     {
-      name: "tommorow",
+      name: "Tommorow",
       _id: 1,
       todos: [
         { name: "make another", desc: "", date: new Date().toString(), _id: 1 },
@@ -68,6 +68,8 @@ export const taskSlice = createSlice({
     }, // reducer, create a new task ( state.tasks[array_id].todos )
     changeSelectedArray(state, action: PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
+
+      state.selectedTaskID = -1;
     }, // reducer, change current selected array of task (id)
     changeSelectedTask(state, action: PayloadAction<number>) {
       state.selectedTaskID = action.payload;
@@ -84,7 +86,9 @@ export const taskSlice = createSlice({
            selected_arr,
            1
         );
-    },
+
+      state.selectedTaskID = -1;
+    }, // reducer, delete current selected task in array of task
     saveChangesTask(state, action: PayloadAction<ITaskSaveAction>) {
       const change : number = state.tasks.find((el) => el._id === state.selectedTaskArrayID)!.todos.findIndex((el) => el._id === action.payload._id) ? 
 

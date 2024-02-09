@@ -4,19 +4,29 @@
     flex-direction: column;
 
     flex-basis: 15%;
-    padding: 1.5%;
+    margin: 0.75%;
+    padding: 0.75%;
+    border-radius: 20px;
+
+    background-color: #F3F3F3;
 }
 
 /* upper */
 
 .menu-header {
+    transition: 0.3s;
+
     display: flex;
 
     width: 100%;
 
     min-height: 10%;
-}
 
+    background-color: #F3F3F3;
+}
+.menu-header > h2 {
+    background-color: #F3F3F3;
+}
 /* middle */
 
 .menu-tasks {
@@ -25,16 +35,22 @@
     min-height: 45%;
     flex-grow: 4;
     flex-direction: column;
+
+    background-color: #F3F3F3;
 }
 .menu-surname {
     font-size: 18px;
     color: #535353;
+
+    background-color: #F3F3F3;
 }
 .menu-current-tasks {
     display: flex;
     flex-direction: column;
 
     margin-left: 5%; 
+
+    background-color: #F3F3F3;
 }
 .menu-task {
     display: flex;
@@ -46,6 +62,8 @@
     font-weight: normal;
 
     transition: 0.3s;
+
+    background-color: #F3F3F3;
 }
 
 .menu-task:hover {
@@ -54,6 +72,8 @@
 }
 .menu-name {
     font-weight: normal;
+
+    background-color: #F3F3F3;
 }
 .menu-value-tasks {
     width: 1.5em;
@@ -97,4 +117,6 @@
     
     min-height: 45%;
     flex-grow: 4;
+
+    background-color: #F3F3F3;
 }

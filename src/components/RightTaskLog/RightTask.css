@@ -4,14 +4,21 @@
     flex-direction: column;
 
     flex-basis: 40%;
-    padding: 1.5%;
+    margin: 0.75%;
+    padding: 0.75%;
+    border-radius: 20px;
+
+    background-color: #F3F3F3;
 }
 .side-task-info {
-    min-height: 85%;    
+    min-height: 80%;    
+
+    background-color: #F3F3F3;
 }
 .side-task-setting {
     width: 100%;
     height: 100%;
+    background-color: #F3F3F3;
 }
 .side-desc-task {
     height: 20%;
@@ -19,11 +26,35 @@
     resize: none;
     
     font-size: 16px;
-    padding: 2.5px;
+    padding: 8.5px;
+    border: 1px solid rgb(210, 210, 210);
     border-radius: 5px;
+
+    background-color: #F3F3F3;
 }
 .side-task-commit-changes {
+    transition: 0.3s;
+
     display: flex;
 
     justify-content: space-around;
+}
+
+.side-buttons {
+    transition: 0.6s;
+    height: 50px;
+    width: 170px;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+}
+.side-save-task {
+    background-color: #FFDD00;
+    border: 1px solid #FFDD00;
+}
+
+.disabled { 
+    background-color: transparent;
+    border-color: #DB0D58;
+    color: #DB0D58;
+    pointer-events:none;
 }
