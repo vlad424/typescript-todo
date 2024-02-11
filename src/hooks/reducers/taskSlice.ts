@@ -10,7 +10,7 @@ const initialState: ReduxState = {
         {
           name: "make together",
           desc: "",
-          date: new Date().toString(),
+          date: new Date(),
           _id: 1,
         },
       ],
@@ -19,7 +19,11 @@ const initialState: ReduxState = {
       name: "Tommorow",
       _id: 1,
       todos: [
-        { name: "make another", desc: "", date: new Date().toString(), _id: 1 },
+        { 
+          name: "make another", 
+          desc: "", date: new Date(),
+          _id: 1 
+        },
       ],
     },
   ],
@@ -58,7 +62,7 @@ export const taskSlice = createSlice({
       const ready_task: ITask = {
         name: action.payload.name, // name (user input)
         desc: action.payload.desc, // desc (user input)
-        date: action.payload.date.toString(), // date of creation
+        date: action.payload.date, // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
       }; 
 

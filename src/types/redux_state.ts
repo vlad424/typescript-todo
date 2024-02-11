@@ -12,7 +12,7 @@ export interface IArrayTasks {
 export interface ITask {
     name: string,
     desc: string,
-    date: string,
+    date: Date,
     _id: number
 }
 export interface ITaskSaveAction {
