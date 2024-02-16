@@ -4,6 +4,7 @@ import {CSSTransition} from 'react-transition-group'
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { ITask } from "../../types/redux_state";
+import DropDown from "../generic/DropDown";
 
 const TaskInfo : React.FC = () => {
   const ID_TASK: number = useAppSelector(
@@ -18,6 +19,8 @@ const TaskInfo : React.FC = () => {
       ?.todos.find((el) => el._id === ID_TASK)
   );
   const dispatch = useAppDispatch();
+
+  const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
   const {deleteTask, saveChangesTask} = taskSlice.actions
   const [value_area, setValue_area] = useState(task?.desc ? task?.desc : "No description") 
   const [enable, setEnable] = useState(true)
@@ -58,6 +61,7 @@ const TaskInfo : React.FC = () => {
             <li className="side-task-menu-item">Date of creation</li>
             <li className="side-task-menu-item">{task?.date.toLocaleDateString()} {task?.date.toLocaleTimeString()}</li>
           </ul>
+          <DropDown {...dropdown_items}/>
         </div>
       </div>
       <div className="side-task-commit-changes">
