@@ -32,6 +32,9 @@
 
     background-color: #F3F3F3;
 }
+.side-task-date-menu > li{
+    background-color: #F3F3F3;
+}
 .side-task-commit-changes {
     transition: 0.3s;
 

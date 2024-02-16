@@ -1,25 +1,31 @@
-import React, { useState } from "react";
-import { useAppSelector } from "../../hooks/redux";
-import { IArrayTasks, ITask } from "../../types/redux_state";
+import React, { useEffect, useState } from "react";
+import { IArrayTasks } from "../../types/redux_state";
 
 const DropDown  = (dropdown_items : Array<IArrayTasks>) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<String>();
+  const dropdown_items_res = Object.values(dropdown_items)
 
-  console.log(dropdown_items)
+  const selectHandler = (event : React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(event.target.value)
+
+    // make reducer in redux for move task into another taskArray
+  }
 
   return (
-    <select className="dropdown-menu">
-      {dropdown_items[0].todos.map((el) => {
+    <label className="change-array-task">
+      Move into:
+      <select className="dropdown-menu" onChange={selectHandler}>
+      {dropdown_items_res.map((el) => {
         return (
           <option
             key={"dropdown-item-" + el._id}
             className="dropdown-menu-item"
             value={el.name}
-            onChange={() => console.log(value)}
-          ></option>
+          >{el.name}</option>
         );
       })}
-    </select>
+    </select> 
+    </label>
   );
 };
 
