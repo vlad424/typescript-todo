@@ -37,7 +37,7 @@ const SelectedTaskArr = () => {
               putTask({
                 name: name,
                 desc: "",
-                date: new Date(),
+                date: new Date().toLocaleDateString().toString() + " " + new Date().toLocaleTimeString().toString(),
                 _id: 2,
               })
             ) 

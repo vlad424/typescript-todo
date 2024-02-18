@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {CSSTransition} from 'react-transition-group'
 
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -31,8 +31,14 @@ const TaskInfo : React.FC = () => {
   }
 
   const deleteTaskButton = () => {
-    const type_task : ITask = task ? task : {name: "", desc: "", date: new Date(), _id: -1}
-
+    const type_task : ITask = task ? 
+      task : 
+      {
+        name: "", 
+        desc: "", 
+        date: new Date().toLocaleDateString + new Date().toLocaleTimeString(), 
+        _id: -1
+      }
     dispatch(deleteTask(type_task._id))
   }
   const saveTaskButton = () => {
@@ -59,7 +65,7 @@ const TaskInfo : React.FC = () => {
           </CSSTransition>
           <ul className="side-task-date-menu">
             <li className="side-task-menu-item">Date of creation</li>
-            <li className="side-task-menu-item">{task?.date.toLocaleDateString()} {task?.date.toLocaleTimeString()}</li>
+            <li className="side-task-menu-item">{task?.date}</li>
           </ul>
           <DropDown {...dropdown_items}/>
         </div>
