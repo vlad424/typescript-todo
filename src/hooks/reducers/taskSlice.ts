@@ -15,6 +15,7 @@ const initialState: ReduxState = {
             " " +
             new Date().toLocaleTimeString().toString(),
           _id: 1,
+          text_color: "#000"
         },
       ],
     },
@@ -30,6 +31,7 @@ const initialState: ReduxState = {
             " " +
             new Date().toLocaleTimeString().toString(),
           _id: 1,
+          text_color: "#000"
         },
       ],
     },
@@ -71,6 +73,7 @@ export const taskSlice = createSlice({
         desc: action.payload.desc, // desc (user input)
         date: action.payload.date, // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
+        text_color: "#000"
       };
 
       state.tasks
@@ -131,8 +134,9 @@ export const taskSlice = createSlice({
                 desc: moved_task.desc,
                 date: moved_task.date,
                 _id: last_id ? last_id + 1 : 0,
+                text_color: action.payload,
               }
-            : { name: "", desc: "", date: "", _id: 10000 }
+            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000" }
         );
       const selected_arr: any = state.tasks
         .find((el) => el._id === state.selectedTaskArrayID)

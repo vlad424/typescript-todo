@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {CSSTransition} from 'react-transition-group'
 
+import {CSSTransition} from 'react-transition-group'
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { ITask } from "../../types/redux_state";
+
 import DropDown from "../generic/DropDown";
+import { CirclePicker } from "react-color";
+
 
 const TaskInfo : React.FC = () => {
   const ID_TASK: number = useAppSelector(
@@ -37,13 +40,16 @@ const TaskInfo : React.FC = () => {
         name: "", 
         desc: "", 
         date: new Date().toLocaleDateString + new Date().toLocaleTimeString(), 
-        _id: -1
+        _id: -1,
+        text_color: "#000"
       }
     dispatch(deleteTask(type_task._id))
   }
-  const saveTaskButton = () => {
 
-    dispatch(saveChangesTask(task ? {desc: value_area, _id: task._id} : {desc: "", _id: -1}))
+  const colors_picker = ["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3", "#03a9f4"]
+
+  const colorHandler = () => {
+    console.log(1)
   }
 
   useEffect(() => {
@@ -68,13 +74,14 @@ const TaskInfo : React.FC = () => {
             <li className="side-task-menu-item">{task?.date}</li>
           </ul>
           <DropDown {...dropdown_items}/>
+          <CirclePicker width="300px" colors={colors_picker} color={task!.text_color.toString()} onChangeComplete={() => colorHandler()}/>
         </div>
       </div>
       <div className="side-task-commit-changes">
         <button className={enable ? "side-buttons side-delete-task" : "side-buttons disabled"} onClick={() => deleteTaskButton()}>
           delete task
         </button>
-        <button className={enable ? "side-buttons side-save-task" : "side-buttons disabled"} onClick={() => saveTaskButton()}>
+        <button className={enable ? "side-buttons side-save-task" : "side-buttons disabled"} onClick={() => dispatch(saveChangesTask(task ? {desc: value_area, _id: task._id} : {desc: "", _id: -1}))}>
           save changes
         </button>
       </div>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
+import Task from "../generic/Task";
 
 const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
 
   const dispatch = useAppDispatch();
-  const { putTask, changeSelectedTask } = taskSlice.actions;
+  const { putTask } = taskSlice.actions;
 
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
@@ -15,17 +16,13 @@ const SelectedTaskArr = () => {
     state.taskReducer.tasks.find((el) => el._id === ID_TASK)
   );
 
+  
+
   return (
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
         return (
-          <div
-            className="task"
-            key={`MiddleTask: ${el._id}`}
-            onClick={() => dispatch(changeSelectedTask(el._id))}
-          >
-            {el.name}
-          </div>
+          <Task {...el}/>
         );
       })}
       <div className="add-new-task">
@@ -39,6 +36,7 @@ const SelectedTaskArr = () => {
                 desc: "",
                 date: new Date().toLocaleDateString().toString() + " " + new Date().toLocaleTimeString().toString(),
                 _id: 2,
+                text_color: "#000"
               })
             ) 
             :

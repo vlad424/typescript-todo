@@ -1,17 +1,26 @@
 import React from 'react';
 import { taskSlice } from '../../hooks/reducers/taskSlice';
 import { useAppDispatch } from '../../hooks/redux';
+import styled from "styled-components";
 
-const Task = (task : any) => {
-    const { changeSelectedArray} = taskSlice.actions;
+const Task = (el : any) => {
+    const { changeSelectedTask} = taskSlice.actions;
 
     const dispatch = useAppDispatch()
 
+    const ColoredTask = styled.div<{$text_color?: String; }>`
+    color: ${(props) : any => props.$text_color};
+    `
+
     return (
-        <div className="menu-task" key={`Task: ${task._id}`} onClick={() => dispatch(changeSelectedArray(task._id))}>
-              <p className="menu-name">{task.name}</p>
-              <p className="menu-value-tasks">{task.todos.length}</p>
-        </div>
+        <ColoredTask 
+            $text_color={el.text_color}
+            className="task"
+            key={`MiddleTask: ${el._id}`}
+            onClick={() => dispatch(changeSelectedTask(el._id))}
+          >
+            {el.name}
+          </ColoredTask>
     );
 };
 
