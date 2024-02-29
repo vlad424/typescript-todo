@@ -1,5 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ITask, ITaskSaveAction, ReduxState } from "../../types/redux_state";
+import {
+  IColorObjectAction,
+  ITask,
+  ITaskSaveAction,
+  ReduxState,
+} from "../../types/redux_state";
 
 const initialState: ReduxState = {
   tasks: [
@@ -15,7 +20,7 @@ const initialState: ReduxState = {
             " " +
             new Date().toLocaleTimeString().toString(),
           _id: 1,
-          text_color: "#000"
+          text_color: "#000",
         },
       ],
     },
@@ -31,7 +36,7 @@ const initialState: ReduxState = {
             " " +
             new Date().toLocaleTimeString().toString(),
           _id: 1,
-          text_color: "#000"
+          text_color: "#000",
         },
       ],
     },
@@ -39,6 +44,10 @@ const initialState: ReduxState = {
 
   selectedTaskArrayID: 0,
   selectedTaskID: 1,
+
+  User: null,
+  isLogined: false,
+  isLoading: false,
 };
 
 export const taskSlice = createSlice({
@@ -73,7 +82,7 @@ export const taskSlice = createSlice({
         desc: action.payload.desc, // desc (user input)
         date: action.payload.date, // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
-        text_color: "#000"
+        text_color: "#000",
       };
 
       state.tasks
@@ -134,7 +143,7 @@ export const taskSlice = createSlice({
                 desc: moved_task.desc,
                 date: moved_task.date,
                 _id: last_id ? last_id + 1 : 0,
-                text_color: action.payload,
+                text_color: moved_task.text_color,
               }
             : { name: "", desc: "", date: "", _id: 10000, text_color: "#000" }
         );
@@ -151,6 +160,12 @@ export const taskSlice = createSlice({
 
       state.selectedTaskID = -1;
     },
+    changeTextColor(state, action: PayloadAction<IColorObjectAction>) {
+      state.tasks
+        .find((el) => el._id === state.selectedTaskArrayID)!
+        .todos.find((el) => el._id === state.selectedTaskID)!.text_color =
+        action.payload.color;
+    }, 
   },
 });
 
