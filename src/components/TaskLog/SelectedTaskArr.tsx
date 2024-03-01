@@ -22,7 +22,7 @@ const SelectedTaskArr = () => {
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
         return (
-          <Task {...el}/>
+          <Task {...el} key={`MiddleTask: ${el._id}`}/>
         );
       })}
       <div className="add-new-task">

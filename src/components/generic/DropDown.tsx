@@ -1,25 +1,31 @@
 import React from "react";
 import { IArrayTasks } from "../../types/redux_state";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import styled from "styled-components";
 
+const Label = styled.label`
+  background-color: #f3f3f3;
+`;
 const DropDown = (dropdown_items: Array<IArrayTasks>) => {
   const dropdown_items_res = Object.values(dropdown_items);
 
   const { moveTask } = taskSlice.actions;
 
+  const selectedTaskID = useAppSelector(
+    (state) => state.taskReducer.selectedTaskID
+  );
   const dispatch = useAppDispatch();
-
-  const Label = styled.label`
-  background-color: #F3F3F3;
-  `
+  const styleOff = () => {
+    if (selectedTaskID === -1) return false;
+    else return true;
+  };
 
   return (
-    <Label>
+    <Label className={styleOff() ? "" : "disabled"}>
       Move into:
       <select
-        className="dropdown-menu"
+        className={styleOff() ? "dropdown-menu" : "dropdown-menu disabled"}
         onChange={(e) => dispatch(moveTask(e.target.value))}
       >
         {dropdown_items_res.map((el) => {
