@@ -58,6 +58,10 @@
 }
 .auth-form-footer {
   display: flex;
-  flex-grow: 1;
+  flex-grow: 2;
   flex-direction: column;
+  align-items: center;
+}
+.auth-form-footer > a {
+  margin-top: 15px;
 }

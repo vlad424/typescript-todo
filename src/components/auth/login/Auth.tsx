@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import "./Auth.css";
+import HeaderForm from "../../generic/HeaderForm";
+import { Link } from "react-router-dom";
 
 const Auth: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -9,9 +11,7 @@ const Auth: React.FC = () => {
   return (
     <div className="auth">
       <div className="auth-form">
-        <header className="auth-form-header">
-          <h2 className="header-text">Log in</h2>
-        </header>
+        <HeaderForm header="Log in" />
         <section className="auth-form-transfer">
           <div className="auth-form-inputs">
             <input
@@ -41,18 +41,12 @@ const Auth: React.FC = () => {
           </div>
         </section>
         <footer className="auth-form-footer">
-          <button
-            className="forgot-password"
-            onClick={() => console.log("forgot")}
-          >
+          <Link to="forgot-password" className="forgot-password">
             forgot password
-          </button>
-          <button
-            className="create-account"
-            onClick={() => console.log("create")}
-          >
+          </Link>
+          <Link to="/register" className="create-account">
             create account
-          </button>
+          </Link>
         </footer>
       </div>
     </div>
