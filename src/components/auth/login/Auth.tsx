@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./Auth.css";
+import "./Auth.scss";
 import HeaderForm from "../../generic/HeaderForm";
 import { Link } from "react-router-dom";
 

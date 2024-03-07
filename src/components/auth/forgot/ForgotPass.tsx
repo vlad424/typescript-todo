@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import HeaderForm from "../../generic/HeaderForm";
 import { Link } from "react-router-dom";
 
-import './ForgotPass.css'
+import './ForgotPass.scss'
 
 const ForgotPass = () => {
   const [email, setEmail] = useState('')
   const [pass, setPassword] = useState('')
 
   return (
-    <div className="forgot-password">
+    <div className="forgot-password-s">
       <div className="forgot-password-form">
         <HeaderForm header="Forgot password" />
         <section className="forgot-form-transfer">
