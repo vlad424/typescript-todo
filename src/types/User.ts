@@ -1,5 +1,7 @@
+import { IUser } from "./redux_state";
+
 export interface userLoginDto {
-    email: string,
+    login: string,
     password: string
 }
 export interface userRegisterDto {
@@ -17,4 +19,7 @@ export interface userForgotPassword {
 export interface userTokens {
     accessToken: string,
     refreshToken: string
+}
+export interface TokensResponse extends userTokens{
+    user: IUser
 }

@@ -11,6 +11,9 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleClick = () => {
+    console.log(1)
+  }
 
   return (
     <div className="register">
@@ -57,7 +60,7 @@ const Register = () => {
           <div className="register-form-continue">
             <button
               className="send-to-check"
-              onClick={() => console.log("check in base")}
+              onClick={() => handleClick()}
             >
               Continue
             </button>

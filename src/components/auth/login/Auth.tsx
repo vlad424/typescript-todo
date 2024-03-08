@@ -3,10 +3,19 @@ import React, { useState } from "react";
 import "./Auth.scss";
 import HeaderForm from "../../generic/HeaderForm";
 import { Link } from "react-router-dom";
+import { AuthService } from "../../../services/auth/auth.service";
 
 const Auth: React.FC = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  console.log(process.env.baseURL)
+
+  const loginClick = async () => {
+    const data = {login: "news", password: "1"}
+
+    await AuthService.login(data)
+  }
 
   return (
     <div className="auth">
@@ -34,7 +43,7 @@ const Auth: React.FC = () => {
           <div className="auth-form-continue">
             <button
               className="send-to-check"
-              onClick={() => console.log("check in base")}
+              onClick={() => loginClick()}
             >
               Continue
             </button>

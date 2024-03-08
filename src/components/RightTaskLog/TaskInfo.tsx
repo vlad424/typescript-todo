@@ -66,7 +66,6 @@ const TaskInfo: React.FC = () => {
       })
     );
   };
-
   useEffect(() => {
     setValue_area(task?.desc ? task?.desc : "No description");
     checker();
