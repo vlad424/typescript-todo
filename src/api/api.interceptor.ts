@@ -4,7 +4,7 @@ import { getAccessToken, reomveTokens } from "../services/auth/auth.helper";
 import { AuthService } from "../services/auth/auth.service";
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_baseURL,
+  baseURL: process.env.REACT_APP_baseURL || "http://localhost:5000/",
   headers: getContentType(),
 });
 

@@ -7,15 +7,15 @@ import { instance } from "../../api/api.interceptor"
 
 export const AuthService = {
   async login(data: userLoginDto) {
-    const response = await instance.post<TokensResponse>('/', {
-      data
+    const response = await instance<TokensResponse>({
+      url: '/',
+      method: 'POST',
+      data 
     })
-
+    
     if(response.data.accessToken) {
       saveToStorage(response.data)
     }
-
-    console.log(data)
 
     return response.data
   },
