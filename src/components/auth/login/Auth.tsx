@@ -2,21 +2,38 @@ import React, { useState } from "react";
 
 import "./Auth.scss";
 import HeaderForm from "../../generic/HeaderForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthService } from "../../../services/auth/auth.service";
 import { getUser } from "../../../services/auth/auth.helper";
+import { taskSlice } from "../../../hooks/reducers/taskSlice";
+import { useAppDispatch } from "../../../hooks/redux";
 
 const Auth: React.FC = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const { pushCurrentUser } = taskSlice.actions;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+
   const loginClick = async () => {
-    const data = {login, password}
+    const data = { login, password };
 
     await AuthService.login(data)
+      .catch((e) => console.log(e))
+      .then(async () => {
+        dispatch(pushCurrentUser(await getUser()));
+        await isLogged()
+      });
+  };
 
-    console.log( await getUser())
-  }
+  const isLogged = async () => {
+    if(Object.keys(await getUser().then((res) => res)).length !== 0) {
+      dispatch(pushCurrentUser(await getUser()));
+      return navigate("/workspace")
+    }
+  };
+  isLogged();
 
   return (
     <div className="auth">
@@ -42,10 +59,7 @@ const Auth: React.FC = () => {
             />
           </div>
           <div className="auth-form-continue">
-            <button
-              className="send-to-check"
-              onClick={() => loginClick()}
-            >
+            <button className="send-to-check" onClick={() => loginClick()}>
               Continue
             </button>
           </div>

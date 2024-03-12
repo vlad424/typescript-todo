@@ -1,10 +1,12 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
+import { PostService } from "../../services/posts/posts.service";
 
 const TasksMenu = () => {
   const {putArrayTask, changeSelectedArray} = taskSlice.actions;
   const tasks = useAppSelector(state => state.taskReducer.tasks)
+  const user = useAppSelector(state => state.taskReducer.User)
 
   const dispatch = useAppDispatch()
 

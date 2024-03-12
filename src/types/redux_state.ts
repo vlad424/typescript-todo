@@ -37,5 +37,5 @@ export interface IUser {
     email: string
 
     _data: Array<IArrayTasks> | null;
-    _id: number
+    id: number
 }

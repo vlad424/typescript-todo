@@ -3,6 +3,7 @@ import {
   IColorObjectAction,
   ITask,
   ITaskSaveAction,
+  IUser,
   ReduxState,
 } from "../../types/redux_state";
 
@@ -166,6 +167,10 @@ export const taskSlice = createSlice({
         .todos.find((el) => el._id === state.selectedTaskID)!.text_color =
         action.payload.color;
     }, 
+    pushCurrentUser(state, action: PayloadAction<IUser>) {
+      state.User = action.payload
+      state.isLogined = true
+    }
   },
 });
 
