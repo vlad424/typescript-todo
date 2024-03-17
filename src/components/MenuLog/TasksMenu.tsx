@@ -10,6 +10,13 @@ const TasksMenu = () => {
 
   const dispatch = useAppDispatch()
 
+  const lol = async () => {
+    const lol = await PostService.getUserPosts(user!.id).catch(e => e)
+    console.log(lol)
+  }
+
+  lol()
+
   return (
     <section className="menu-tasks">
       <p className="menu-surname">TASKS</p>

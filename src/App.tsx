@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LeftMenu from "./components/LeftMenu";
 import RightTaskDesc from "./components/RightTaskDesc";
 import Task from "./components/Task";
-import { useAppSelector } from "./hooks/redux";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import Auth from "./components/auth/login/Auth";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ForgotPass from "./components/auth/forgot/ForgotPass";
 import Register from "./components/auth/register/Register";
+import { taskSlice } from "./hooks/reducers/taskSlice";
+import { getUser } from "./services/auth/auth.helper";
 
 function App() {
   //local vars
   const isLogined = useAppSelector((state) => state.taskReducer.isLogined);
   //const isLoading = useAppSelector((state) => state.taskReducer.isLoading);
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const { pushCurrentUser } = taskSlice.actions
+
+  const isLogged = async () => {
+    if(Object.keys(await getUser().then((res) => res)).length !== 0) {
+      dispatch(pushCurrentUser(await getUser()));
+      return navigate("/workspace")
+    }
+  };
+
+  useEffect(() => {
+    isLogged();
+  }, [])
 
   if (isLogined === true) {
     return (
