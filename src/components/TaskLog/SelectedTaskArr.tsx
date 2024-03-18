@@ -16,8 +16,6 @@ const SelectedTaskArr = () => {
     state.taskReducer.tasks.find((el) => el._id === ID_TASK)
   );
 
-  
-
   return (
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
@@ -36,7 +34,8 @@ const SelectedTaskArr = () => {
                 desc: "",
                 date: new Date().toLocaleDateString().toString() + " " + new Date().toLocaleTimeString().toString(),
                 _id: 2,
-                text_color: "#000"
+                text_color: "#000",
+                iArrayTasksId: 0
               })
             ) 
             :

@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
+  IArrayTasks,
   IColorObjectAction,
   ITask,
   ITaskSaveAction,
@@ -12,6 +13,7 @@ const initialState: ReduxState = {
     {
       name: "Today",
       _id: 0,
+      userId: 0,
       todos: [
         {
           name: "make together",
@@ -22,12 +24,14 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           _id: 1,
           text_color: "#000",
+          iArrayTasksId: 0
         },
       ],
     },
     {
       name: "Tommorow",
       _id: 1,
+      userId: 0,
       todos: [
         {
           name: "make another",
@@ -38,6 +42,7 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           _id: 1,
           text_color: "#000",
+          iArrayTasksId: 0
         },
       ],
     },
@@ -63,6 +68,7 @@ export const taskSlice = createSlice({
           name: action.payload,
           _id: 0,
           todos: [],
+          userId: 0
         });
       } // if array is null
       else {
@@ -70,6 +76,7 @@ export const taskSlice = createSlice({
           name: action.payload,
           _id: last_id + 1,
           todos: [],
+          userId: 0
         });
       }
     }, // reducer, create a new array of task (state.tasks)
@@ -84,6 +91,7 @@ export const taskSlice = createSlice({
         date: action.payload.date, // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
         text_color: "#000",
+        iArrayTasksId: 0
       };
 
       state.tasks
@@ -113,6 +121,13 @@ export const taskSlice = createSlice({
 
       state.selectedTaskID = -1;
     }, // reducer, delete current selected task in array of task
+    swapAllTasks(state, action: PayloadAction<Array<IArrayTasks> >) {
+      state.tasks = []
+
+      for(let i = 0; i < action.payload.length; i++) {
+        state.tasks.push(action.payload[i])
+      }
+    }, // reduce, swipe all tasks to task from db
     saveChangesTask(state, action: PayloadAction<ITaskSaveAction>) {
       const change: number = state.tasks
         .find((el) => el._id === state.selectedTaskArrayID)!
@@ -145,8 +160,9 @@ export const taskSlice = createSlice({
                 date: moved_task.date,
                 _id: last_id ? last_id + 1 : 0,
                 text_color: moved_task.text_color,
+                iArrayTasksId: 0
               }
-            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000" }
+            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000", iArrayTasksId: 0 }
         );
       const selected_arr: any = state.tasks
         .find((el) => el._id === state.selectedTaskArrayID)

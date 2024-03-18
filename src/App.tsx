@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LeftMenu from "./components/LeftMenu";
 import RightTaskDesc from "./components/RightTaskDesc";
 import Task from "./components/Task";
@@ -17,25 +17,31 @@ function App() {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [indentUser, setIndentUser] = useState(0)
 
   const { pushCurrentUser } = taskSlice.actions
 
   const isLogged = async () => {
     if(Object.keys(await getUser().then((res) => res)).length !== 0) {
-      dispatch(pushCurrentUser(await getUser()));
-      return navigate("/workspace")
+      
+      const user = await getUser()
+      
+      dispatch(pushCurrentUser(user));
+      setIndentUser(indentUser => indentUser = user.id)
+
+      return navigate(`/workspace/${user.id}`)
     }
   };
 
   useEffect(() => {
     isLogged();
-  }, [])
+  }, [isLogined])
 
   if (isLogined === true) {
     return (
       <Routes>
         <Route
-          path="/workspace"
+          path={`/workspace/${indentUser}`}
           element={
             <main className="App">
               <LeftMenu />

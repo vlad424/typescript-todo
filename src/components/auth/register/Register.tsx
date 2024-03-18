@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderForm from "../../generic/HeaderForm";
 
 import './Register.scss'
+import { AuthService } from "../../../services/auth/auth.service";
+import { useAppDispatch } from "../../../hooks/redux";
+import { taskSlice } from "../../../hooks/reducers/taskSlice";
+import { getUser } from "../../../services/auth/auth.helper";
 
 const Register = () => {
   const [firstName, setFirstName] = useState('')
@@ -11,8 +15,25 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleClick = () => {
-    console.log(1)
+  const { pushCurrentUser } = taskSlice.actions
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+
+  const handleClick = async () => {
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      login,
+      email,
+      password
+    }
+
+    await AuthService.register(data)
+
+    if(Object.keys(await getUser().then((res) => res)).length !== 0) {
+      dispatch(pushCurrentUser(await getUser()));
+      return navigate("/workspace")
+    }
   }
 
   return (

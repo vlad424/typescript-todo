@@ -3,7 +3,7 @@ import { useAppSelector } from "../../hooks/redux";
 
 const HeaderTask = () => {
   const selected_array = useAppSelector(state => state.taskReducer.selectedTaskArrayID)
-  const header = useAppSelector(state => state.taskReducer.tasks[selected_array].name)
+  const header = useAppSelector(state => state.taskReducer.tasks[selected_array]?.name)
 
   return (
     <header className="tasks-header">

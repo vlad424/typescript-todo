@@ -43,6 +43,7 @@ const TaskInfo: React.FC = () => {
           date: new Date().toLocaleDateString + new Date().toLocaleTimeString(),
           _id: -1,
           text_color: "#000",
+          iArrayTasksId: 0
         };
     dispatch(deleteTask(type_task._id));
   };

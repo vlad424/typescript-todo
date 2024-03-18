@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { PostService } from "../../services/posts/posts.service";
 
 const TasksMenu = () => {
-  const {putArrayTask, changeSelectedArray} = taskSlice.actions;
+  const {putArrayTask, changeSelectedArray, swapAllTasks} = taskSlice.actions;
   const tasks = useAppSelector(state => state.taskReducer.tasks)
   const user = useAppSelector(state => state.taskReducer.User)
 
   const dispatch = useAppDispatch()
 
-  const lol = async () => {
-    const lol = await PostService.getUserPosts(user!.id).catch(e => e)
-    console.log(lol)
-  }
+  const fetchData = async () => {
+    const posts = await PostService.getUserPosts(user!.id).catch(e => e)
+    const changedPosts = {}
 
-  lol()
+    dispatch(swapAllTasks(posts.data))
+
+    console.log(posts.data)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <section className="menu-tasks">

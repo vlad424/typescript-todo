@@ -4,8 +4,7 @@ export const PostService = {
   async getUserPosts(id: number) {
     const response = await instance({
       method: 'GET',
-      url: '/workspace',
-      params: id
+      url: `/workspace/${id}`,
     })
 
     return response

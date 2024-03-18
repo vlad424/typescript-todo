@@ -1,7 +1,7 @@
 import Cookies from "js-cookie"
 import { getContentType } from "../../api/api.helper"
 import { saveToStorage } from "./auth.helper"
-import { TokensResponse, userLoginDto } from "../../types/User"
+import { TokensResponse, userLoginDto, userRegisterDto } from "../../types/User"
 import { instance } from "../../api/api.interceptor"
 
 export const AuthService = {
@@ -19,6 +19,20 @@ export const AuthService = {
     return response.data
   },
   
+  async register(data: userRegisterDto) {
+    const response = await instance<TokensResponse>({
+      url: '/register',
+      method: 'POST',
+      data
+    })
+
+    if(response.data.accessToken) {
+      saveToStorage(response.data)
+    }
+
+    return(response.data)
+  },
+
   async getNewTokens() {
     const refreshToken = Cookies.get('refreshToken')
     

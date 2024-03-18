@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./TaskLog/task.css";
+import "./TaskLog/task.scss";
 import HeaderTask from "./TaskLog/HeaderTask";
 import SelectedTaskArr from "./TaskLog/SelectedTaskArr";
 
