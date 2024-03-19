@@ -12,23 +12,23 @@ export interface ReduxState {
 }
 export interface IArrayTasks {
     name: string,
-    _id: number,
+    id: number,
     todos: Array<ITask>
 }
 export interface ITask {
     name: string,
     desc: string,
     date: String,
-    _id: number
+    id: number
     text_color: String;
 }
 export interface ITaskSaveAction {
     desc: string,
-    _id: number
+    id: number
 }
 export interface IColorObjectAction {
     color: String,
-    _id: number
+    id: number
 }
 export interface IUser {
     first_name: string

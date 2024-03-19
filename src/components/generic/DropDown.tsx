@@ -31,7 +31,7 @@ const DropDown = (dropdown_items: Array<IArrayTasks>) => {
         {dropdown_items_res.map((el) => {
           return (
             <option
-              key={"dropdown-item-" + el._id}
+              key={"dropdown-item-" + el.id}
               className="dropdown-menu-item"
               value={el.name}
             >

@@ -13,14 +13,14 @@ const SelectedTaskArr = () => {
     (state) => state.taskReducer.selectedTaskArrayID
   );
   const selected_array = useAppSelector((state) =>
-    state.taskReducer.tasks.find((el) => el._id === ID_TASK)
+    state.taskReducer.tasks.find((el) => el.id === ID_TASK)
   );
 
   return (
     <section className="tasks-view">
       {selected_array?.todos.map((el) => {
         return (
-          <Task {...el} key={`MiddleTask: ${el._id}`}/>
+          <Task {...el} key={`MiddleTask: ${el.id}`}/>
         );
       })}
       <div className="add-new-task">
@@ -33,7 +33,7 @@ const SelectedTaskArr = () => {
                 name: name,
                 desc: "",
                 date: new Date().toLocaleDateString().toString() + " " + new Date().toLocaleTimeString().toString(),
-                _id: 2,
+                id: 2,
                 text_color: "#000",
               })
             ) 

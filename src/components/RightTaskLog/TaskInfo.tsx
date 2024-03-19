@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { CSSTransition } from "react-transition-group";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { ITask } from "../../types/redux_state";
@@ -17,8 +16,8 @@ const TaskInfo: React.FC = () => {
   );
   const task = useAppSelector((state) =>
     state.taskReducer.tasks
-      .find((el) => el._id === ID_ARRAY)
-      ?.todos.find((el) => el._id === ID_TASK)
+      .find((el) => el.id === ID_ARRAY)
+      ?.todos.find((el) => el.id === ID_TASK)
   );
   const dispatch = useAppDispatch();
 
@@ -41,10 +40,10 @@ const TaskInfo: React.FC = () => {
           name: "",
           desc: "",
           date: new Date().toLocaleDateString + new Date().toLocaleTimeString(),
-          _id: -1,
+          id: -1,
           text_color: "#000",
         };
-    dispatch(deleteTask(type_task._id));
+    dispatch(deleteTask(type_task.id));
   };
 
   const colors_picker = [
@@ -62,7 +61,7 @@ const TaskInfo: React.FC = () => {
     dispatch(
       changeTextColor({
         color: hex_color.hex,
-        _id: task!._id,
+        id: task!.id,
       })
     );
   };
@@ -119,8 +118,8 @@ const TaskInfo: React.FC = () => {
             dispatch(
               saveChangesTask(
                 task
-                  ? { desc: value_area, _id: task._id }
-                  : { desc: "", _id: -1 }
+                  ? { desc: value_area, id: task.id }
+                  : { desc: "", id: -1 }
               )
             )
           }

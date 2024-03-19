@@ -15,8 +15,8 @@ const RightTaskDesc = () => {
   const task_name = useAppSelector(
     (state) =>
       state.taskReducer.tasks
-        .find((el) => el._id === ID_ARRAY)
-        ?.todos.find((el) => el._id === ID_TASK)
+        .find((el) => el.id === ID_ARRAY)
+        ?.todos.find((el) => el.id === ID_TASK)
   );
 
   return (

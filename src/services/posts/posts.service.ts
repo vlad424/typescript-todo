@@ -8,5 +8,5 @@ export const PostService = {
     })
 
     return response
-  }
+  }, 
 }

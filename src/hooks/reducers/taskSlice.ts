@@ -12,7 +12,7 @@ const initialState: ReduxState = {
   tasks: [
     {
       name: "Today",
-      _id: 0,
+      id: 0,
       todos: [
         {
           name: "make together",
@@ -21,14 +21,14 @@ const initialState: ReduxState = {
             new Date().toLocaleDateString().toString() +
             " " +
             new Date().toLocaleTimeString().toString(),
-          _id: 1,
+          id: 1,
           text_color: "#000",
         },
       ],
     },
     {
       name: "Tommorow",
-      _id: 1,
+      id: 1,
       todos: [
         {
           name: "make anoth1er",
@@ -37,7 +37,7 @@ const initialState: ReduxState = {
             new Date().toLocaleDateString().toString() +
             " " +
             new Date().toLocaleTimeString().toString(),
-          _id: 1,
+          id: 1,
           text_color: "#000",
         },
       ],
@@ -57,40 +57,42 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     putArrayTask(state, action: PayloadAction<string>) {
-      const last_id = state.tasks.at(-1)?._id; // last id in arrays
+      const lastId = state.tasks.at(-1)?.id; // last id in arrays
 
-      if (last_id === undefined) {
+      if (lastId === undefined) {
         state.tasks.push({
           name: action.payload,
-          _id: 0,
+          id: 0,
           todos: [],
         });
       } // if array is null
       else {
         state.tasks.push({
           name: action.payload,
-          _id: last_id + 1,
+          id: lastId + 1,
           todos: [],
         });
       }
     }, // reducer, create a new array of task (state.tasks)
     putTask(state, action: PayloadAction<ITask>) {
-      const last_id = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
-        ?.todos.at(-1)?._id;
+      const lastId = state.tasks
+        .find((el) => el.id === state.selectedTaskArrayID)
+        ?.todos.at(-1)?.id;
+
+      console.log(lastId)
 
       const ready_task: ITask = {
         name: action.payload.name, // name (user input)
         desc: action.payload.desc, // desc (user input)
         date: action.payload.date, // date of creation
-        _id: last_id ? last_id + 1 : 0, // dynamic id
+        id: lastId ? lastId + 1 : 0, // dynamic id
         text_color: "#000",
       };
 
       state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
+        .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.push(ready_task);
-    }, // reducer, create a new task ( state.tasks[array_id].todos )
+    }, // reducer, create a new task ( state.tasks[arrayid].todos )
     changeSelectedArray(state, action: PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
 
@@ -101,15 +103,15 @@ export const taskSlice = createSlice({
     }, // reducer, change current selected task (id)
     deleteTask(state, action: PayloadAction<number>) {
       const selected_arr: any = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
-        ?.todos.findIndex((el) => el._id === action.payload)
+        .find((el) => el.id === state.selectedTaskArrayID)
+        ?.todos.findIndex((el) => el.id === action.payload)
         ? state.tasks
-            .find((el) => el._id === state.selectedTaskArrayID)
-            ?.todos.findIndex((el) => el._id === action.payload)
+            .find((el) => el.id === state.selectedTaskArrayID)
+            ?.todos.findIndex((el) => el.id === action.payload)
         : 0;
 
       state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
+        .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.splice(selected_arr, 1);
 
       state.selectedTaskID = -1;
@@ -123,25 +125,25 @@ export const taskSlice = createSlice({
     }, // reduce, swipe all tasks to task from db
     saveChangesTask(state, action: PayloadAction<ITaskSaveAction>) {
       const change: number = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)!
-        .todos.findIndex((el) => el._id === action.payload._id)
+        .find((el) => el.id === state.selectedTaskArrayID)!
+        .todos.findIndex((el) => el.id === action.payload.id)
         ? state.tasks
-            .find((el) => el._id === state.selectedTaskArrayID)!
-            .todos.findIndex((el) => el._id === action.payload._id)
+            .find((el) => el.id === state.selectedTaskArrayID)!
+            .todos.findIndex((el) => el.id === action.payload.id)
         : 0;
 
-      state.tasks.find((el) => el._id === state.selectedTaskArrayID)!.todos[
+      state.tasks.find((el) => el.id === state.selectedTaskArrayID)!.todos[
         change
       ].desc = action.payload.desc;
     },
     moveTask(state, action: PayloadAction<String>) {
       const moved_task = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)!
-        .todos.find((el) => el._id === state.selectedTaskID);
+        .find((el) => el.id === state.selectedTaskArrayID)!
+        .todos.find((el) => el.id === state.selectedTaskID);
 
-      const last_id = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
-        ?.todos.at(-1)?._id;
+      const lastId = state.tasks
+        .find((el) => el.id === state.selectedTaskArrayID)
+        ?.todos.at(-1)?.id;
 
       state.tasks
         .find((el) => el.name === action.payload)!
@@ -151,28 +153,28 @@ export const taskSlice = createSlice({
                 name: moved_task.name,
                 desc: moved_task.desc,
                 date: moved_task.date,
-                _id: last_id ? last_id + 1 : 0,
+                id: lastId ? lastId + 1 : 0,
                 text_color: moved_task.text_color,
               }
-            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000"}
+            : { name: "", desc: "", date: "", id: 10000, text_color: "#000"}
         );
       const selected_arr: any = state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
-        ?.todos.findIndex((el) => el._id === moved_task!._id)
+        .find((el) => el.id === state.selectedTaskArrayID)
+        ?.todos.findIndex((el) => el.id === moved_task!.id)
         ? state.tasks
-            .find((el) => el._id === state.selectedTaskArrayID)
-            ?.todos.findIndex((el) => el._id === moved_task!._id)
+            .find((el) => el.id === state.selectedTaskArrayID)
+            ?.todos.findIndex((el) => el.id === moved_task!.id)
         : 0;
       state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)
+        .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.splice(selected_arr, 1);
 
       state.selectedTaskID = -1;
     },
     changeTextColor(state, action: PayloadAction<IColorObjectAction>) {
       state.tasks
-        .find((el) => el._id === state.selectedTaskArrayID)!
-        .todos.find((el) => el._id === state.selectedTaskID)!.text_color =
+        .find((el) => el.id === state.selectedTaskArrayID)!
+        .todos.find((el) => el.id === state.selectedTaskID)!.text_color =
         action.payload.color;
     }, 
     pushCurrentUser(state, action: PayloadAction<IUser>) {

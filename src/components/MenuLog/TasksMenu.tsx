@@ -18,12 +18,12 @@ const TasksMenu = () => {
       for (let i = 0; i < posts.data.length; i++) {
         changedPosts!.push({
           name: posts.data[i].name,
-          _id: i,
+          id: i,
           todos: posts.data[i].todos,
         });
       }
       dispatch(swapAllTasks(changedPosts ? changedPosts : tasks));
-      dispatch(changeSelectedTask(changedPosts[0].todos[0]._id))
+      dispatch(changeSelectedTask(changedPosts[0].todos[0].id))
     }
   };
   useEffect(() => {
@@ -38,8 +38,8 @@ const TasksMenu = () => {
           return (
             <div
               className="menu-task"
-              key={`Task: ${el._id}`}
-              onClick={() => dispatch(changeSelectedArray(el._id))}
+              key={`Task: ${el.id}`}
+              onClick={() => dispatch(changeSelectedArray(el.id))}
             >
               <p className="menu-name">{el.name}</p>
               <p className="menu-value-tasks">{el.todos.length}</p>
