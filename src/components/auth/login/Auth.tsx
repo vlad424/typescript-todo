@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Auth.scss";
 import HeaderForm from "../../generic/HeaderForm";
@@ -33,7 +33,9 @@ const Auth: React.FC = () => {
       return navigate("/workspace")
     }
   };
-  isLogged();
+  useEffect(() => {
+    isLogged();
+  }, [])
 
   return (
     <div className="auth">

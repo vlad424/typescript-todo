@@ -35,7 +35,6 @@ const SelectedTaskArr = () => {
                 date: new Date().toLocaleDateString().toString() + " " + new Date().toLocaleTimeString().toString(),
                 _id: 2,
                 text_color: "#000",
-                iArrayTasksId: 0
               })
             ) 
             :

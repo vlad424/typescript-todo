@@ -43,7 +43,6 @@ const TaskInfo: React.FC = () => {
           date: new Date().toLocaleDateString + new Date().toLocaleTimeString(),
           _id: -1,
           text_color: "#000",
-          iArrayTasksId: 0
         };
     dispatch(deleteTask(type_task._id));
   };
@@ -76,25 +75,24 @@ const TaskInfo: React.FC = () => {
     <>
       <div className="side-task-info">
         <div className="side-task-setting">
-          <CSSTransition in={enable} timeout={1200} classNames="my-node">
-            <textarea
-              className={enable ? "side-desc-task" : "side-desc-task disabled"}
-              value={value_area}
-              placeholder={value_area}
-              onChange={(e) => setValue_area(e.target.value)}
-            ></textarea>
-          </CSSTransition>
-          <CSSTransition
-            in={enable}
-            timeout={1200}
-            classNames={enable ? "my-node" : "disabled my-node"}
-          >
-            <ul className="side-task-date-menu">
-              <li className={enable ? "side-task-menu-item" : "side-task-menu-item disabled"}>Date of creation: </li>
-              <li className="side-task-menu-item">{task?.date}</li>
-            </ul>
-          </CSSTransition>
-            <DropDown {...dropdown_items}/>
+          <textarea
+            className={enable ? "side-desc-task" : "side-desc-task disabled"}
+            value={value_area}
+            placeholder={value_area}
+            onChange={(e) => setValue_area(e.target.value)}
+          ></textarea>
+          <ul className="side-task-date-menu">
+            <li
+              className={
+                enable ? "side-task-menu-item" : "side-task-menu-item disabled"
+              }
+            >
+              Date of creation:{" "}
+            </li>
+            <li className="side-task-menu-item">{task?.date}</li>
+          </ul>
+
+          <DropDown {...dropdown_items} />
           <CirclePicker
             width="auto"
             className={enable ? "circle-picker" : "disabled circle-picker"}

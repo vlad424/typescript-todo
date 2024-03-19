@@ -13,7 +13,6 @@ const initialState: ReduxState = {
     {
       name: "Today",
       _id: 0,
-      userId: 0,
       todos: [
         {
           name: "make together",
@@ -24,17 +23,15 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           _id: 1,
           text_color: "#000",
-          iArrayTasksId: 0
         },
       ],
     },
     {
       name: "Tommorow",
       _id: 1,
-      userId: 0,
       todos: [
         {
-          name: "make another",
+          name: "make anoth1er",
           desc: "",
           date:
             new Date().toLocaleDateString().toString() +
@@ -42,7 +39,6 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           _id: 1,
           text_color: "#000",
-          iArrayTasksId: 0
         },
       ],
     },
@@ -68,7 +64,6 @@ export const taskSlice = createSlice({
           name: action.payload,
           _id: 0,
           todos: [],
-          userId: 0
         });
       } // if array is null
       else {
@@ -76,7 +71,6 @@ export const taskSlice = createSlice({
           name: action.payload,
           _id: last_id + 1,
           todos: [],
-          userId: 0
         });
       }
     }, // reducer, create a new array of task (state.tasks)
@@ -91,7 +85,6 @@ export const taskSlice = createSlice({
         date: action.payload.date, // date of creation
         _id: last_id ? last_id + 1 : 0, // dynamic id
         text_color: "#000",
-        iArrayTasksId: 0
       };
 
       state.tasks
@@ -160,9 +153,8 @@ export const taskSlice = createSlice({
                 date: moved_task.date,
                 _id: last_id ? last_id + 1 : 0,
                 text_color: moved_task.text_color,
-                iArrayTasksId: 0
               }
-            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000", iArrayTasksId: 0 }
+            : { name: "", desc: "", date: "", _id: 10000, text_color: "#000"}
         );
       const selected_arr: any = state.tasks
         .find((el) => el._id === state.selectedTaskArrayID)

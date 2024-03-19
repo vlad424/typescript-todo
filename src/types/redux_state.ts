@@ -14,7 +14,6 @@ export interface IArrayTasks {
     name: string,
     _id: number,
     todos: Array<ITask>
-    userId: number
 }
 export interface ITask {
     name: string,
@@ -22,7 +21,6 @@ export interface ITask {
     date: String,
     _id: number
     text_color: String;
-    iArrayTasksId: number
 }
 export interface ITaskSaveAction {
     desc: string,
