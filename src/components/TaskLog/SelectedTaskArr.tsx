@@ -15,12 +15,18 @@ const SelectedTaskArr = () => {
   const selected_array = useAppSelector((state) =>
     state.taskReducer.tasks.find((el) => el.id === ID_TASK)
   );
+  const blockType = useAppSelector(state => state.viewReducer.wrap)
+
+  const hu = () => {
+    if(blockType === 'wrap') return 'wrap'
+    else if(blockType === 'wrap') return 'nowrap'
+  }
 
   return (
-    <section className="tasks-view">
+    <section className="tasks-view" style={{flexWrap: hu()}}>
       {selected_array?.todos.map((el) => {
         return (
-          <Task {...el} key={`MiddleTask: ${el.id}`}/>
+            <Task {...el} key={`MiddleTask: ${el.id}`}/>
         );
       })}
       <div className="add-new-task">

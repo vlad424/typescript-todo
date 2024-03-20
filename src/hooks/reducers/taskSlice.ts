@@ -79,8 +79,6 @@ export const taskSlice = createSlice({
         .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.at(-1)?.id;
 
-      console.log(lastId)
-
       const ready_task: ITask = {
         name: action.payload.name, // name (user input)
         desc: action.payload.desc, // desc (user input)

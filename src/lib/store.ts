@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import taskReducer from "../hooks/reducers/taskSlice";
+import viewReducer from "../hooks/reducers/viewSlice";
 
 const rootReducer = combineReducers({
-    taskReducer
+    taskReducer,
+    viewReducer
 })
 
 export const setupStore = () => {
