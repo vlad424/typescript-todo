@@ -25,13 +25,26 @@ const Task = (el: any) => {
   const checker = () => {
     if(blockRef.current !== null) 
     if(blockHeight === 0) {
-      blockRef.current ?  dispatch(changeHeight(blockRef.current.getBoundingClientRect().height)) : console.log()
+      const payload = {
+        width: blockRef.current.getBoundingClientRect().width,
+        height: blockRef.current.getBoundingClientRect().height,
+      }
+
+      blockRef.current ? dispatch(changeHeight(payload)) : console.log()
     }
     else if(blockHeight > blockRef.current.getBoundingClientRect().height) {
-      dispatch(changeViewBlock(blockRef.current.getBoundingClientRect().height))
+      const payload = {
+        width: blockRef.current.getBoundingClientRect().width,
+        height: blockRef.current.getBoundingClientRect().height,
+      }
+      dispatch(changeViewBlock(payload))
     }
-    else if(blockHeight <= blockRef.current.getBoundingClientRect().height) {
-      dispatch(changeViewBlock(blockRef.current.getBoundingClientRect().height))
+    else if(blockHeight < blockRef.current.getBoundingClientRect().height) {
+      const payload = {
+        width: blockRef.current.getBoundingClientRect().width,
+        height: blockRef.current.getBoundingClientRect().height,
+      }
+      dispatch(changeViewBlock(payload))
     }
   }
 

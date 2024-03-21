@@ -44,6 +44,7 @@
     display: flex;
 
     justify-content: space-around;
+    background-color: #F3F3F3;
 }
 .side-buttons {
     transition: 0.8s;
@@ -55,6 +56,7 @@
 .side-save-task {
     background-color: #FFDD00;
     border: 1px solid #FFDD00;
+    
 }
 
 .disabled { 
