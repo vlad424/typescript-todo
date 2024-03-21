@@ -15,6 +15,12 @@ const Task = (el: any) => {
   const { changeSelectedTask } = taskSlice.actions;
   const blockRef = useRef<HTMLInputElement>(null)
   const blockHeight = useAppSelector(state => state.viewReducer.height)
+  const blockType = useAppSelector(state => state.viewReducer.wrap)
+
+  const hu = () => {
+    if(blockType === 'wrap') return '25%' 
+    else if(blockType === 'nowrap') return '95%'
+  }
 
   const checker = () => {
     if(blockRef.current !== null) 
@@ -34,7 +40,9 @@ const Task = (el: any) => {
   }, []) 
 
   return (
-      <ColoredTask ref={blockRef}
+      <ColoredTask 
+        style={{width: hu()}}
+        ref={blockRef}
         $text_color={el.text_color}
         className="task"
         onClick={() => dispatch(changeSelectedTask(el.id))}

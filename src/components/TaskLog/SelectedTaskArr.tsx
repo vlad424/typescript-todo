@@ -19,7 +19,11 @@ const SelectedTaskArr = () => {
 
   const hu = () => {
     if(blockType === 'wrap') return 'wrap'
-    else if(blockType === 'wrap') return 'nowrap'
+    else if(blockType === 'nowrap') return 'nowrap'
+  }
+  const wc = () => {
+    if(blockType === 'wrap') return '25%'
+    else if(blockType === 'nowrap') return '95%'
   }
 
   return (
@@ -29,7 +33,7 @@ const SelectedTaskArr = () => {
             <Task {...el} key={`MiddleTask: ${el.id}`}/>
         );
       })}
-      <div className="add-new-task">
+      <div className="add-new-task" style={{width: wc()}}>
         <button
           className="task-view-add"
           onClick={() => {

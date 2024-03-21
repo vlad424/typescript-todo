@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  width: 0,
   height: 0,
   wrap: "nowrap",
 };
@@ -11,13 +12,11 @@ export const viewSlice = createSlice({
   reducers: {
     changeHeight(state, action: PayloadAction<number>) {
 			state.height = action.payload
+      state.width = action.payload
 		},
     changeViewBlock(state, action: PayloadAction<number>) {
 			if(state.height > action.payload) {
         state.wrap = 'wrap'
-      }
-      if(state.height <= action.payload) {
-        state.wrap = 'nowrap'
       }
 		},
   },
