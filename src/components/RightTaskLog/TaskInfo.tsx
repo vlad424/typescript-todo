@@ -6,13 +6,18 @@ import { ITask } from "../../types/redux_state";
 
 import DropDown from "../generic/DropDown";
 import { CirclePicker } from "react-color";
+import { viewSlice } from "../../hooks/reducers/viewSlice";
 
 const TaskInfo: React.FC = () => {
+
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskID
   );
   const ID_ARRAY: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
+  );
+  const selected_array = useAppSelector((state) =>
+    state.taskReducer.tasks.find((el) => el.id === ID_ARRAY)
   );
   const task = useAppSelector((state) =>
     state.taskReducer.tasks
@@ -23,6 +28,7 @@ const TaskInfo: React.FC = () => {
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
   const { deleteTask, saveChangesTask, changeTextColor } = taskSlice.actions;
+  const { changeViewBlock } = viewSlice.actions
   const [value_area, setValue_area] = useState(
     task?.desc ? task?.desc : "No description"
   );
@@ -34,6 +40,9 @@ const TaskInfo: React.FC = () => {
   };
 
   const deleteTaskButton = () => {
+    if (selected_array!.todos.length <= 7) {
+      dispatch(changeViewBlock({ width: 1000, height: 1000 }));
+    }
     const type_task: ITask = task
       ? task
       : {

@@ -3,11 +3,20 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { PostService } from "../../services/posts/posts.service";
 import { IArrayTasks } from "../../types/redux_state";
+import { viewSlice } from "../../hooks/reducers/viewSlice";
 
 const TasksMenu = () => {
   const { putArrayTask, changeSelectedArray, swapAllTasks, changeSelectedTask } = taskSlice.actions;
+  const { changeViewBlock } = viewSlice.actions
   const tasks = useAppSelector((state) => state.taskReducer.tasks);
   const user = useAppSelector((state) => state.taskReducer.User);
+
+  const ID_ARRAY: number = useAppSelector(
+    (state) => state.taskReducer.selectedTaskArrayID
+  );
+  const selected_array = useAppSelector((state) =>
+    state.taskReducer.tasks.find((el) => el.id === ID_ARRAY)
+  );
 
   const dispatch = useAppDispatch();
 
@@ -26,6 +35,13 @@ const TasksMenu = () => {
       dispatch(changeSelectedTask(changedPosts[0].todos[0].id))
     }
   };
+  const changeSelectedArrayFun = (id: number) => {
+    dispatch(changeSelectedArray(id))
+
+    if (selected_array!.todos.length < 7) {
+      dispatch(changeViewBlock({ width: 1000, height: 1000 }));
+    }
+  }
   useEffect(() => {
     fetchData();
   }, []);
@@ -39,7 +55,7 @@ const TasksMenu = () => {
             <div
               className="menu-task"
               key={`Task: ${el.id}`}
-              onClick={() => dispatch(changeSelectedArray(el.id))}
+              onClick={() => changeSelectedArrayFun(el.id)}
             >
               <p className="menu-name">{el.name}</p>
               <p className="menu-value-tasks">{el.todos.length}</p>

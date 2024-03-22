@@ -39,13 +39,6 @@ const Task = (el: any) => {
       }
       dispatch(changeViewBlock(payload))
     }
-    else if(blockHeight < blockRef.current.getBoundingClientRect().height) {
-      const payload = {
-        width: blockRef.current.getBoundingClientRect().width,
-        height: blockRef.current.getBoundingClientRect().height,
-      }
-      dispatch(changeViewBlock(payload))
-    }
   }
 
   useEffect(() => {

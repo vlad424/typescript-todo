@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import Task from "../generic/Task";
+import { viewSlice } from "../../hooks/reducers/viewSlice";
 
 const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const { putTask } = taskSlice.actions;
+  const { changeViewBlock } = viewSlice.actions
 
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
@@ -25,7 +27,6 @@ const SelectedTaskArr = () => {
     if(blockType === 'wrap') return '25%'
     else if(blockType === 'nowrap') return '95%'
   }
-
   return (
     <section className="tasks-view" style={{flexWrap: hu()}}>
       {selected_array?.todos.map((el) => {
