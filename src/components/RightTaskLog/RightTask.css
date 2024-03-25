@@ -32,8 +32,17 @@
 
     background-color: #F3F3F3;
 }
+
+.side-task-date-menu {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #F3F3F3;
+}
 .side-task-date-menu > li{
     background-color: #F3F3F3;
+}
+.circle-picker {
+    margin-top: 5%;
 }
 .circle-picker, .circle-picker span {
     background-color: #F3F3F3;
@@ -64,6 +73,18 @@
     border-color: #DB0D58;
     color: #DB0D58;
     pointer-events:none;
+}
+
+.dropdown-menu {
+    border: 1px solid rgb(210, 210, 210);
+    background-color: #F3F3F3;
+    border-radius: 0px;
+}
+.dropdown-menu-item {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
 }
 .my-node-enter {
     opacity: 0.6;

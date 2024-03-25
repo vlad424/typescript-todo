@@ -75,21 +75,11 @@ export const taskSlice = createSlice({
       }
     }, // reducer, create a new array of task (state.tasks)
     putTask(state, action: PayloadAction<ITask>) {
-      const lastId = state.tasks
-        .find((el) => el.id === state.selectedTaskArrayID)
-        ?.todos.at(-1)?.id;
-
-      const ready_task: ITask = {
-        name: action.payload.name, // name (user input)
-        desc: action.payload.desc, // desc (user input)
-        date: action.payload.date, // date of creation
-        id: lastId ? lastId + 1 : 0, // dynamic id
-        text_color: "#000",
-      };
+      console.log(action.payload)
 
       state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)
-        ?.todos.push(ready_task);
+        ?.todos.push(action.payload);
     }, // reducer, create a new task ( state.tasks[arrayid].todos )
     changeSelectedArray(state, action: PayloadAction<number>) {
       state.selectedTaskArrayID = action.payload;
