@@ -14,6 +14,9 @@ const SelectedTaskArr = () => {
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
+  const NAME_ARRAY: string = useAppSelector((state) =>
+    state.taskReducer.tasks.find((el) => el.id === ID_TASK)!.name
+  );
   const selected_array = useAppSelector((state) =>
     state.taskReducer.tasks.find((el) => el.id === ID_TASK)
   );
@@ -32,7 +35,7 @@ const SelectedTaskArr = () => {
       text_color: "#000",
     };
 
-    await PostService.putPost(post, await getUser().then(res => res.id))
+    await PostService.putPost({post: post, arrayName: NAME_ARRAY}, await getUser().then(res => res.id))
 
     return post
   };

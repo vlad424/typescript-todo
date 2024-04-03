@@ -1,108 +1,112 @@
 .right-side {
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    flex-basis: 40%;
-    margin: 0.75%;
-    padding: 0.75%;
-    border-radius: 20px;
+  flex-basis: 40%;
+  margin: 0.75%;
+  padding: 0.75%;
+  border-radius: 20px;
 
-    background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 .side-task-info {
-    min-height: 80%;    
+  min-height: 80%;
 
-    background-color: #F3F3F3;
+  background-color: #f3f3f3;
 }
 .side-task-setting {
-    width: 100%;
-    height: 100%;
-    background-color: #F3F3F3;
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
 }
 .side-desc-task {
-    height: 20%;
-    width: 80%;
-    resize: none;
-    
-    font-size: 16px;
-    padding: 8.5px;
-    border: 1px solid rgb(210, 210, 210);
-    border-radius: 5px;
+  height: 20%;
+  width: 80%;
+  resize: none;
 
-    background-color: #F3F3F3;
+  font-size: 16px;
+  padding: 8.5px;
+  border: none;
+  border-radius: 10px;
+  background: #f3f3f3;
+  box-shadow: 7px 7px 14px #cfcfcf, -7px -7px 14px #ffffff;
 }
 
 .side-task-date-menu {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    background-color: #F3F3F3;
+  width: 80%;
+  padding: 8.5px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 10px;
+  background: #f3f3f3;
+  box-shadow: 7px 7px 14px #cfcfcf, -7px -7px 14px #ffffff;
 }
-.side-task-date-menu > li{
-    background-color: #F3F3F3;
+.side-task-date-menu > li {
+  background-color: #f3f3f3;
 }
 .circle-picker {
-    margin-top: 5%;
+  margin-top: 5%;
 }
-.circle-picker, .circle-picker span {
-    background-color: #F3F3F3;
+.circle-picker,
+.circle-picker span {
+  background-color: #f3f3f3;
 }
 .side-task-commit-changes {
-    transition: 0.3s;
+  transition: 0.3s;
 
-    display: flex;
+  display: flex;
 
-    justify-content: space-around;
-    background-color: #F3F3F3;
+  justify-content: space-around;
+  background-color: #f3f3f3;
 }
 .side-buttons {
-    transition: 0.8s;
-    height: 50px;
-    width: 170px;
-    border: 1px solid rgb(210, 210, 210);
-    border-radius: 10px;
+  transition: 0.8s;
+  height: 50px;
+  width: 170px;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 10px;
 }
 .side-save-task {
-    background-color: #FFDD00;
-    border: 1px solid #FFDD00;
-    
+  background-color: #ffdd00;
+  border: 1px solid #ffdd00;
 }
 
-.disabled { 
-    background-color: transparent;
-    border-color: #DB0D58;
-    color: #DB0D58;
-    pointer-events:none;
+.disabled {
+  background-color: transparent;
+  border-color: #db0d58;
+  color: #db0d58;
+  pointer-events: none;
 }
 
 .dropdown-menu {
-    border: 1px solid rgb(210, 210, 210);
-    background-color: #F3F3F3;
-    border-radius: 0px;
+  border: 1px solid rgb(210, 210, 210);
+  background-color: #f3f3f3;
+  border-radius: 0px;
 }
 .dropdown-menu-item {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
 }
 .my-node-enter {
-    opacity: 0.6;
-    border: 1px solid rgb(210, 210, 210);
-    background-color: #F3F3F3;
+  opacity: 0.6;
+  border: 1px solid rgb(210, 210, 210);
+  background-color: #f3f3f3;
 }
 .my-node-enter-active {
-    opacity: 1;
-    transition: opacity 1200ms;
+  opacity: 1;
+  transition: opacity 1200ms;
 }
 .my-node-exit {
-    opacity: 1;
-    transition: opacity 1200ms;
-    border-color: #DB0D58;
-    color: #DB0D58;  
+  opacity: 1;
+  transition: opacity 1200ms;
+  border-color: #db0d58;
+  color: #db0d58;
 }
 .my-node-exit-active {
-    transition: opacity 1200ms;
-    border-color: #DB0D58;
-    color: #DB0D58;  
+  transition: opacity 1200ms;
+  border-color: #db0d58;
+  color: #db0d58;
 }

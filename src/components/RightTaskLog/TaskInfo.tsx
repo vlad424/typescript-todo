@@ -7,6 +7,8 @@ import { ITask } from "../../types/redux_state";
 import DropDown from "../generic/DropDown";
 import { CirclePicker } from "react-color";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
+import { PostService } from "../../services/posts/posts.service";
+import { getUser } from "../../services/auth/auth.helper";
 
 const TaskInfo: React.FC = () => {
 
@@ -23,7 +25,7 @@ const TaskInfo: React.FC = () => {
     state.taskReducer.tasks
       .find((el) => el.id === ID_ARRAY)
       ?.todos.find((el) => el.id === ID_TASK)
-  );
+  ) as ITask;
   const dispatch = useAppDispatch();
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
@@ -39,7 +41,7 @@ const TaskInfo: React.FC = () => {
     else setEnable(true);
   };
 
-  const deleteTaskButton = () => {
+  const deleteTaskButton = async () => {
     if (selected_array!.todos.length <= 7) {
       dispatch(changeViewBlock({ width: 1000, height: 1000 }));
     }
@@ -52,8 +54,18 @@ const TaskInfo: React.FC = () => {
           id: -1,
           text_color: "#000",
         };
+    
+    await PostService.deletePost(type_task.id, await getUser().then(res => res.id))
     dispatch(deleteTask(type_task.id));
   };
+
+  const saveTask = async () => {
+    console.log(task.desc)
+    await PostService.updatePost({desc: value_area, text_color: task.text_color, todoId: task.id}, await getUser().then(res => res.id))
+
+    dispatch(saveChangesTask({ desc: value_area, id: task.id }))
+  }
+
 
   const colors_picker = [
     "#000",
@@ -123,14 +135,8 @@ const TaskInfo: React.FC = () => {
           className={
             enable ? "side-buttons side-save-task" : "side-buttons disabled"
           }
-          onClick={() =>
-            dispatch(
-              saveChangesTask(
-                task
-                  ? { desc: value_area, id: task.id }
-                  : { desc: "", id: -1 }
-              )
-            )
+          onClick={async() =>
+            await saveTask()
           }
         >
           save changes

@@ -32,7 +32,9 @@ const TasksMenu = () => {
         });
       }
       dispatch(swapAllTasks(changedPosts ? changedPosts : tasks));
-      dispatch(changeSelectedTask(changedPosts[0].todos[0].id))
+      if(changedPosts[0].todos.length > 0) {
+        dispatch(changeSelectedTask(changedPosts[0].todos[0].id)) 
+      }
     }
   };
   const changeSelectedArrayFun = (id: number) => {

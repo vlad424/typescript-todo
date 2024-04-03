@@ -75,8 +75,6 @@ export const taskSlice = createSlice({
       }
     }, // reducer, create a new array of task (state.tasks)
     putTask(state, action: PayloadAction<ITask>) {
-      console.log(action.payload)
-
       state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.push(action.payload);
