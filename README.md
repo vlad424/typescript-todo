@@ -1,14 +1,16 @@
 <h1>TypeScript todo app created with ReactJs<h1/>
 
 <h2>Used:</h2> 
-- TypeScript
-- ReactJs
-- react-redux (^9.0.4) 
-- styled-components (^6.1.8)
-- react-color (^2.19.3)
-- js-cookie (^3.0.5)
-- axios (^1.6.7)
-- RTK-query
+<ul>
+  <li>TypeScript</li>
+  <li>ReactJs</li>
+  <li>react-redux (^9.0.4) </li>
+  <li>styled-components (^6.1.8)</li>
+  <li>react-color (^2.19.3)</li>
+  <li>js-cookie (^3.0.5)</li>
+  <li>axios (^1.6.7)</li>
+  <li>RTK-query</li>
+</ul>
 
 <h2>Features: </h2>
 - Create a userboard, stats, nevermind
