@@ -13,15 +13,17 @@
 </ul>
 
 <h2>Features: </h2>
-- Create a userboard, stats, nevermind
-- Create a user profile interface
-- Make a quit account
-- Add marks for posts
+<ul>
+  <li>Add marks for posts</li>
+  <li>Create a userboard, stats, nevermind</li>
+  <li>Create a user profile interface</li>
+  <li>Make a quit account</li>
+</ul>
 
 <h2>Pages:</h2>
-
--Login page:
+<ul>
+  <li>Login page:</li>
 ![image](https://github.com/vlad424/typescript-todo/assets/54576715/2f31db10-e40c-4969-a152-c45db00e4bc3)
--Workspace page:
+  <li>Workspace page:</li>
 ![image](https://github.com/vlad424/typescript-todo/assets/54576715/8b3a1841-1e9f-41c0-92b3-aa69855bcd52)
-
+</ul>
