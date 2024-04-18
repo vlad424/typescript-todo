@@ -23,7 +23,12 @@
 <h2>Pages:</h2>
 <ul>
   <li>Login page:</li>
-![image](https://github.com/vlad424/typescript-todo/assets/54576715/2f31db10-e40c-4969-a152-c45db00e4bc3)
-  <li>Workspace page:</li>
-![image](https://github.com/vlad424/typescript-todo/assets/54576715/8b3a1841-1e9f-41c0-92b3-aa69855bcd52)
 </ul>
+
+![image](https://github.com/vlad424/typescript-todo/assets/54576715/2f31db10-e40c-4969-a152-c45db00e4bc3)
+
+<ul>
+  <li>Workspace page:</li>
+</ul>
+
+![image](https://github.com/vlad424/typescript-todo/assets/54576715/8b3a1841-1e9f-41c0-92b3-aa69855bcd52)
