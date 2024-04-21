@@ -5,9 +5,12 @@ export interface IPost {
   arrayName: string
 }
 export interface IUpdatePost {
-  desc: string,
-  text_color: String,
-  todoId: number
+  post: {
+    desc: string,
+    text_color: String,
+    todoId: number
+  },
+  id: number
 }
 export interface IPutPost {
   post: {

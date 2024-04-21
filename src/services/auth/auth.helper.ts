@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { TokensResponse, userTokens } from "../../types/User";
+import { TokensResponse, userTokens } from "../../types/user.types";
 
 export const saveTokens = (data: userTokens) => {
   Cookies.set("accessToken", data.accessToken);

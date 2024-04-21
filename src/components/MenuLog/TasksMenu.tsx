@@ -4,10 +4,17 @@ import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { PostService } from "../../services/posts/posts.service";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
+import { useGetTodosMutation } from "../../hooks/api-query/todos.api";
 
 const TasksMenu = () => {
-  const { putArrayTask, changeSelectedArray, swapAllTasks, changeSelectedTask } = taskSlice.actions;
-  const { changeViewBlock } = viewSlice.actions
+  const {
+    putArrayTask,
+    changeSelectedArray,
+    swapAllTasks,
+    changeSelectedTask,
+  } = taskSlice.actions;
+  const { changeViewBlock } = viewSlice.actions;
+  const [GetPosts, {isLoading, data}] = useGetTodosMutation();
   const tasks = useAppSelector((state) => state.taskReducer.tasks);
   const user = useAppSelector((state) => state.taskReducer.User);
 
@@ -22,6 +29,7 @@ const TasksMenu = () => {
 
   const fetchData = async () => {
     let changedPosts: Array<IArrayTasks> | null = [];
+
     const posts = await PostService.getUserPosts(user!.id).catch((e) => e);
     if (posts) {
       for (let i = 0; i < posts.data.length; i++) {
@@ -32,38 +40,49 @@ const TasksMenu = () => {
         });
       }
       dispatch(swapAllTasks(changedPosts ? changedPosts : tasks));
-      if(changedPosts[0].todos.length > 0) {
-        dispatch(changeSelectedTask(changedPosts[0].todos[0].id)) 
+      if (changedPosts[0].todos.length > 0) {
+        dispatch(changeSelectedTask(changedPosts[0].todos[0].id));
       }
     }
+    // if(data) {
+    //   dispatch(swapAllTasks(data.data));
+    //   if (data.data[0].todos.length > 0) {
+    //     dispatch(changeSelectedTask(changedPosts[0].todos[0].id));
+    //   }
+    // }
   };
   const changeSelectedArrayFun = (id: number) => {
-    dispatch(changeSelectedArray(id))
+    dispatch(changeSelectedArray(id));
 
     if (selected_array!.todos.length < 7) {
       dispatch(changeViewBlock({ width: 1000, height: 1000 }));
     }
-  }
+  };
   useEffect(() => {
+    GetPosts(user!.id)
     fetchData();
-  }, []);
+  }, [tasks[ID_ARRAY].todos.length === 1]);
 
   return (
     <section className="menu-tasks">
       <p className="menu-surname">TASKS</p>
       <div className="menu-current-tasks">
-        {tasks.map((el) => {
-          return (
-            <div
-              className="menu-task"
-              key={`Task: ${el.id}`}
-              onClick={() => changeSelectedArrayFun(el.id)}
-            >
-              <p className="menu-name">{el.name}</p>
-              <p className="menu-value-tasks">{el.todos.length}</p>
-            </div>
-          );
-        })}
+        {isLoading ? (
+          <div> Loading... </div>
+        ) : (
+          tasks.map((el) => {
+            return (
+              <div
+                className="menu-task"
+                key={`Task: ${el.id}`}
+                onClick={() => changeSelectedArrayFun(el.id)}
+              >
+                <p className="menu-name">{el.name}</p>
+                <p className="menu-value-tasks">{el.todos.length}</p>
+              </div>
+            );
+          })
+        )}
         <button
           className="menu-task-add"
           onClick={() => {

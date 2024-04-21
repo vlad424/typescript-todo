@@ -9,9 +9,9 @@ import { CirclePicker } from "react-color";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
 import { PostService } from "../../services/posts/posts.service";
 import { getUser } from "../../services/auth/auth.helper";
+import { useUpdateTodoMutation } from "../../hooks/api-query/todos.api";
 
 const TaskInfo: React.FC = () => {
-
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskID
   );
@@ -27,6 +27,7 @@ const TaskInfo: React.FC = () => {
       ?.todos.find((el) => el.id === ID_TASK)
   ) as ITask;
   const dispatch = useAppDispatch();
+  const [updatePost] = useUpdateTodoMutation()
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
   const { deleteTask, saveChangesTask, changeTextColor } = taskSlice.actions;
@@ -60,10 +61,10 @@ const TaskInfo: React.FC = () => {
   };
 
   const saveTask = async () => {
-    console.log(task.desc)
-    await PostService.updatePost({desc: value_area, text_color: task.text_color, todoId: task.id}, await getUser().then(res => res.id))
-
-    dispatch(saveChangesTask({ desc: value_area, id: task.id }))
+    updatePost({
+      post: {desc: value_area, text_color: task.text_color, todoId: task.id},
+      id: await getUser().then(res => res.id)
+    })
   }
 
 

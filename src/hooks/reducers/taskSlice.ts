@@ -58,7 +58,6 @@ export const taskSlice = createSlice({
   reducers: {
     putArrayTask(state, action: PayloadAction<string>) {
       const lastId = state.tasks.at(-1)?.id; // last id in arrays
-
       if (lastId === undefined) {
         state.tasks.push({
           name: action.payload,
@@ -99,7 +98,6 @@ export const taskSlice = createSlice({
       state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.splice(selected_arr, 1);
-
       state.selectedTaskID = -1;
     }, // reducer, delete current selected task in array of task
     swapAllTasks(state, action: PayloadAction<Array<IArrayTasks> >) {
