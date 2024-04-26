@@ -2,23 +2,24 @@ import { IArrayTasks, ITask } from "../../types/redux_state";
 import { IDeletePost, IPutPost, IUpdatePost } from "../../types/rtk.types";
 import { api } from "./api";
 
-export const todosApi = api.enhanceEndpoints({addTagTypes: ['Todos']}).injectEndpoints({
+export const todosApi = api.injectEndpoints({
   endpoints: builder => ({
-    GetTodos: builder.mutation<{data: Array<IArrayTasks>}, number>({
-      query: (id : number) => ({
-        method: 'GET',
-        url: `/workspace/${id}`
-      }),
-      providesTags: undefined
+    GetTodos: builder.query<Array<IArrayTasks>, number>({
+      query: (id: number) => `/workspace/${id}`,
+      providesTags: ['Todos'],
     }),
-    PutTodo: builder.mutation<null, IPutPost>({
-      query: (data: IPutPost) => ({
-        method: 'POST',
-        url: `/workspace/${data.id}`,
-        body: data.post
-      }),
-      invalidatesTags: () => [{type: 'Todos'}]
+    pop: builder.query<null, IPutPost>({
+      query: (data: IPutPost) => `/workspace/${data.id}`,
+      providesTags: ['Todos']
     }),
+    // PutTodo: builder.mutation<null, IPutPost>({
+    //   query: (data: IPutPost) => ({
+    //     method: 'POST',
+    //     url: `/workspace/${data.id}`,
+    //     body: data.post
+    //   }),
+    //   invalidatesTags: () => [{type: 'Todos'}]
+    // }),
     DeleteTodo: builder.mutation<null, IDeletePost>({
       query: (data: IDeletePost) => ({
         method: 'DELETE',
@@ -39,8 +40,8 @@ export const todosApi = api.enhanceEndpoints({addTagTypes: ['Todos']}).injectEnd
 })
 
 export const { 
-  useGetTodosMutation,
-  usePutTodoMutation,
+  useGetTodosQuery,
+  usePopQuery,
   useDeleteTodoMutation,
   useUpdateTodoMutation
 } = todosApi

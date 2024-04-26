@@ -4,6 +4,8 @@ import { taskSlice } from "../../hooks/reducers/taskSlice";
 import Task from "../generic/Task";
 import { PostService } from "../../services/posts/posts.service";
 import { getUser } from "../../services/auth/auth.helper";
+import { usePopQuery } from "../../hooks/api-query/todos.api";
+import { ITask } from "../../types/redux_state";
 
 const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
@@ -11,33 +13,45 @@ const SelectedTaskArr = () => {
   const dispatch = useAppDispatch();
   const { putTask } = taskSlice.actions;
 
+  const user = useAppSelector((state) => state.taskReducer.User);
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
-  const NAME_ARRAY: string = useAppSelector((state) =>
-    state.taskReducer.tasks.find((el) => el.id === ID_TASK)!.name
+  const NAME_ARRAY: string = useAppSelector(
+    (state) => state.taskReducer.tasks.find((el) => el.id === ID_TASK)!.name
   );
   const selected_array = useAppSelector((state) =>
     state.taskReducer.tasks.find((el) => el.id === ID_TASK)
   );
-  const lastId = useAppSelector(state => state.taskReducer.tasks.find((el) => el.id === ID_TASK)?.todos.at(-1)?.id)
+  const lastId = useAppSelector(
+    (state) =>
+      state.taskReducer.tasks.find((el) => el.id === ID_TASK)?.todos.at(-1)?.id
+  );
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
 
   const createPost = async (data: string) => {
-    const post = {
+    const post: ITask = {
       name: data,
       desc: "desc",
       date:
         new Date().toLocaleDateString().toString() +
         " " +
         new Date().toLocaleTimeString().toString(),
-      id: lastId ? lastId+1 : 0,
+      id: lastId ? lastId + 1 : 0,
       text_color: "#000",
     };
 
-    await PostService.putPost({post: post, arrayName: NAME_ARRAY}, await getUser().then(res => res.id))
+    // usePopQuery({
+    //   post: {post: post, arrayName: NAME_ARRAY},
+    //   id: user!.id
+    // });
 
-    return post
+    await PostService.putPost(
+      { post: post, arrayName: NAME_ARRAY },
+      await getUser().then((res) => res.id)
+    );
+
+    return post;
   };
 
   const hu = () => {
@@ -58,9 +72,7 @@ const SelectedTaskArr = () => {
           className="task-view-add"
           onClick={async () => {
             name
-              ? dispatch(
-                  putTask(await createPost(name))
-                )
+              ? dispatch(putTask(await createPost(name)))
               : console.log("incorrect name");
           }}
         >

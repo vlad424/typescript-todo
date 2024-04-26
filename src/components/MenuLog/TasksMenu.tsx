@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
-import { PostService } from "../../services/posts/posts.service";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
-import { useGetTodosMutation } from "../../hooks/api-query/todos.api";
+import { useGetTodosQuery } from "../../hooks/api-query/todos.api";
 
 const TasksMenu = () => {
   const {
@@ -14,9 +13,9 @@ const TasksMenu = () => {
     changeSelectedTask,
   } = taskSlice.actions;
   const { changeViewBlock } = viewSlice.actions;
-  const [GetPosts, {isLoading, data}] = useGetTodosMutation();
   const tasks = useAppSelector((state) => state.taskReducer.tasks);
   const user = useAppSelector((state) => state.taskReducer.User);
+  const {data, isLoading} = useGetTodosQuery(user!.id);
 
   const ID_ARRAY: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
@@ -30,13 +29,12 @@ const TasksMenu = () => {
   const fetchData = async () => {
     let changedPosts: Array<IArrayTasks> | null = [];
 
-    const posts = await PostService.getUserPosts(user!.id).catch((e) => e);
-    if (posts) {
-      for (let i = 0; i < posts.data.length; i++) {
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
         changedPosts!.push({
-          name: posts.data[i].name,
+          name: data[i].name,
           id: i,
-          todos: posts.data[i].todos,
+          todos: data[i].todos,
         });
       }
       dispatch(swapAllTasks(changedPosts ? changedPosts : tasks));
@@ -44,12 +42,6 @@ const TasksMenu = () => {
         dispatch(changeSelectedTask(changedPosts[0].todos[0].id));
       }
     }
-    // if(data) {
-    //   dispatch(swapAllTasks(data.data));
-    //   if (data.data[0].todos.length > 0) {
-    //     dispatch(changeSelectedTask(changedPosts[0].todos[0].id));
-    //   }
-    // }
   };
   const changeSelectedArrayFun = (id: number) => {
     dispatch(changeSelectedArray(id));
@@ -59,9 +51,9 @@ const TasksMenu = () => {
     }
   };
   useEffect(() => {
-    GetPosts(user!.id)
+    //GetPosts(user!.id)
     fetchData();
-  }, [tasks[ID_ARRAY].todos.length === 1]);
+  }, [tasks[ID_ARRAY].todos.length === 0, isLoading]);
 
   return (
     <section className="menu-tasks">
