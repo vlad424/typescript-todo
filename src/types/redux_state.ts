@@ -35,6 +35,7 @@ export interface IUser {
     last_name: string
     login: string
     email: string
+    role: string
 
     _data: Array<IArrayTasks> | null;
     id: number

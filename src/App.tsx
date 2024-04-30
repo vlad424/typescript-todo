@@ -9,11 +9,12 @@ import ForgotPass from "./components/auth/forgot/ForgotPass";
 import Register from "./components/auth/register/Register";
 import { taskSlice } from "./hooks/reducers/taskSlice";
 import { getUser } from "./services/auth/auth.helper";
+import { IUser } from "./types/redux_state";
 
 function App() {
   //local vars
   const isLogined = useAppSelector((state) => state.taskReducer.isLogined);
-  //const isLoading = useAppSelector((state) => state.taskReducer.isLoading);
+  let userR = useAppSelector(state => state.taskReducer.User)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -25,11 +26,10 @@ function App() {
     if(Object.keys(await getUser().then((res) => res)).length !== 0) {
       
       const user = await getUser()
-      
+      userR = user
+
       dispatch(pushCurrentUser(user));
       setIndentUser(indentUser => indentUser = user.id)
-
-      return navigate(`/workspace/${user.id}`)
     }
   };
 
@@ -38,21 +38,44 @@ function App() {
   }, [isLogined])
 
   if (isLogined === true) {
-    return (
-      <Routes>
-        <Route
-          path={`/workspace/${indentUser}`}
-          element={
-            <main className="App">
-              <LeftMenu />
-              <Task />
-              <RightTaskDesc />
-            </main>
-          }
-        />
-      </Routes>
-    );
-  } else {
+    if(userR!.role === 'admin') {
+      return (
+        <Routes>
+          <Route
+            path={`/workspace/${indentUser}`}
+            element={
+              <main className="App">
+                <LeftMenu />
+                <Task />
+                <RightTaskDesc />
+              </main>
+            }
+          />
+          <Route
+            path={`/workspace/${indentUser}/admin`}
+            element = {<div className="admin">xuy</div>}
+          />
+        </Routes>
+      ); 
+    }
+    else {
+      return (
+        <Routes>
+          <Route
+            path={`/workspace/${indentUser}`}
+            element={
+              <main className="App">
+                <LeftMenu />
+                <Task />
+                <RightTaskDesc />
+              </main>
+            }
+          />
+        </Routes>
+      ); 
+    }
+  } 
+  else {
     return (
       <Routes>
         <Route

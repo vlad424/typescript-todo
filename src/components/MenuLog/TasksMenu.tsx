@@ -53,7 +53,7 @@ const TasksMenu = () => {
   useEffect(() => {
     //GetPosts(user!.id)
     fetchData();
-  }, [tasks[ID_ARRAY].todos.length === 0, isLoading]);
+  }, [isLoading]);
 
   return (
     <section className="menu-tasks">

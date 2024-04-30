@@ -7,9 +7,8 @@ import { ITask } from "../../types/redux_state";
 import DropDown from "../generic/DropDown";
 import { CirclePicker } from "react-color";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
-import { PostService } from "../../services/posts/posts.service";
 import { getUser } from "../../services/auth/auth.helper";
-import { useUpdateTodoMutation } from "../../hooks/api-query/todos.api";
+import { useDeleteTodoMutation, useUpdateTodoMutation } from "../../hooks/api-query/todos.api";
 
 const TaskInfo: React.FC = () => {
   const ID_TASK: number = useAppSelector(
@@ -28,6 +27,7 @@ const TaskInfo: React.FC = () => {
   ) as ITask;
   const dispatch = useAppDispatch();
   const [updatePost] = useUpdateTodoMutation()
+  const [deletePost] = useDeleteTodoMutation()
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
   const { deleteTask, saveChangesTask, changeTextColor } = taskSlice.actions;
@@ -55,8 +55,7 @@ const TaskInfo: React.FC = () => {
           id: -1,
           text_color: "#000",
         };
-    
-    await PostService.deletePost(type_task.id, await getUser().then(res => res.id))
+    deletePost({todoId: type_task.id, id: await getUser().then(res => res.id)})
     dispatch(deleteTask(type_task.id));
   };
 

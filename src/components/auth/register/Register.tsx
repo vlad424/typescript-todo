@@ -4,7 +4,7 @@ import HeaderForm from "../../generic/HeaderForm";
 
 import './Register.scss'
 import { AuthService } from "../../../services/auth/auth.service";
-import { useAppDispatch } from "../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { taskSlice } from "../../../hooks/reducers/taskSlice";
 import { getUser } from "../../../services/auth/auth.helper";
 
@@ -18,7 +18,7 @@ const Register = () => {
   const { pushCurrentUser } = taskSlice.actions
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-
+  
   const handleClick = async () => {
     const data = {
       first_name: firstName,
@@ -31,8 +31,13 @@ const Register = () => {
     await AuthService.register(data)
 
     if(Object.keys(await getUser().then((res) => res)).length !== 0) {
+      const credentials = await getUser()
+
       dispatch(pushCurrentUser(await getUser()));
-      return navigate("/workspace")
+
+      console.log(credentials.id)
+
+      return navigate(`/workspace/${credentials.id}`)
     }
   }
 

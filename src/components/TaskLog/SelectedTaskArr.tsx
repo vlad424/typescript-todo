@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import Task from "../generic/Task";
-import { PostService } from "../../services/posts/posts.service";
 import { getUser } from "../../services/auth/auth.helper";
-import { usePopQuery } from "../../hooks/api-query/todos.api";
 import { ITask } from "../../types/redux_state";
+import { usePutTodoMutation } from "../../hooks/api-query/todos.api";
 
 const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const { putTask } = taskSlice.actions;
-
-  const user = useAppSelector((state) => state.taskReducer.User);
+  
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
@@ -29,6 +27,8 @@ const SelectedTaskArr = () => {
   );
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
 
+  const [putTodo] = usePutTodoMutation()
+
   const createPost = async (data: string) => {
     const post: ITask = {
       name: data,
@@ -41,15 +41,13 @@ const SelectedTaskArr = () => {
       text_color: "#000",
     };
 
-    // usePopQuery({
-    //   post: {post: post, arrayName: NAME_ARRAY},
-    //   id: user!.id
-    // });
-
-    await PostService.putPost(
-      { post: post, arrayName: NAME_ARRAY },
-      await getUser().then((res) => res.id)
-    );
+    putTodo({
+      post: {
+        post,
+        arrayName: NAME_ARRAY
+      },
+      id: await getUser().then((res) => res.id)
+    })
 
     return post;
   };
