@@ -51,7 +51,6 @@ const TasksMenu = () => {
     }
   };
   useEffect(() => {
-    //GetPosts(user!.id)
     fetchData();
   }, [isLoading]);
 

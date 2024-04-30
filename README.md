@@ -25,7 +25,19 @@
   <li>Login page:</li>
 </ul>
 
-![image](https://github.com/vlad424/typescript-todo/assets/54576715/2f31db10-e40c-4969-a152-c45db00e4bc3)
+![login form](image.png)
+
+<ul>
+  <li>Register page:</li>
+</ul>
+
+![register form](image-1.png)
+
+<ul>
+  <li>Forgot password page: (doesn't work now)</li>
+</ul>
+
+![forgot password](image-2.png)
 
 <ul>
   <li>Workspace page:</li>

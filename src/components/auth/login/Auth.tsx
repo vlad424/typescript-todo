@@ -44,8 +44,12 @@ const Auth: React.FC = () => {
 
   return (
     <div className="auth">
+      <div className="auth-info-content">
+        
+      </div>
+
       <div className="auth-form">
-        <HeaderForm header="Log in" />
+        <HeaderForm header="Log in"/>
         <section className="auth-form-transfer">
           <div className="auth-form-inputs">
             <input
