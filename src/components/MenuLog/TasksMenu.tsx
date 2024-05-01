@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
-import { useGetTodosQuery } from "../../hooks/api-query/todos.api";
+import { useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
 
 const TasksMenu = () => {
   const {
@@ -17,6 +17,9 @@ const TasksMenu = () => {
   const user = useAppSelector((state) => state.taskReducer.User);
   const {data, isLoading} = useGetTodosQuery(user!.id);
 
+  const [lastArrayId, setLastArrayID] = useState(0)
+  const [inputValue, setInputValue] = useState('')
+
   const ID_ARRAY: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
@@ -25,12 +28,14 @@ const TasksMenu = () => {
   );
 
   const dispatch = useAppDispatch();
+  const [putTodo] = usePutTodoMutation()
 
   const fetchData = async () => {
     let changedPosts: Array<IArrayTasks> | null = [];
 
     if (data) {
       for (let i = 0; i < data.length; i++) {
+        setLastArrayID(lastArrayId => lastArrayId = data[i].id)
         changedPosts!.push({
           name: data[i].name,
           id: i,
@@ -50,6 +55,22 @@ const TasksMenu = () => {
       dispatch(changeViewBlock({ width: 1000, height: 1000 }));
     }
   };
+  const createClickButton = () => {
+    putTodo({
+        post: {
+          name: inputValue,
+          id: lastArrayId,
+          todos: []
+        },
+        id: user!.id,
+        action: "PUT_ARRAY"
+      }
+      
+    )
+
+    dispatch(putArrayTask(inputValue))
+  }
+
   useEffect(() => {
     fetchData();
   }, [isLoading]);
@@ -74,14 +95,22 @@ const TasksMenu = () => {
             );
           })
         )}
-        <button
-          className="menu-task-add"
-          onClick={() => {
-            dispatch(putArrayTask("yesterday"));
-          }}
-        >
-          Add New Array
-        </button>
+        <div className="add-array">
+          <button
+            className="menu-task-add"
+            onClick={() => {
+              createClickButton();
+            }}
+          >
+          </button>
+          <input 
+              type="text" 
+              className="add-new-array"
+              value={inputValue}
+              onChange={(e) => {setInputValue(inputValue => inputValue = e.target.value)}}
+              placeholder="add new array"  
+            />
+        </div>
       </div>
     </section>
   );

@@ -88,6 +88,10 @@
     font-size: 12px;
     background-color: #EAEAEA;
 }
+.add-array {
+    display: flex;
+    flex-direction: row;
+}
 .menu-task-add {
     display: flex; 
 

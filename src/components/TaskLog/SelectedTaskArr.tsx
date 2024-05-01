@@ -42,12 +42,13 @@ const SelectedTaskArr = () => {
       text_color: "#000",
     };
 
-    const   success_post : any  = await putTodo({
+    const success_post : any  = await putTodo({
       post: {
         post,
         arrayName: NAME_ARRAY
       },
-      id: await getUser().then((res) => res.id)
+      id: await getUser().then((res) => res.id),
+      action: "PUT_TODO"
     })
 
     return success_post.data;

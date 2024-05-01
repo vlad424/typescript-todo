@@ -1,6 +1,6 @@
-import { createApi } from "@reduxjs/toolkit/query";
-import { api } from "./api";
-import { TokensResponse, userLoginDto } from "../../types/user.types";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { api } from "../api";
+import { TokensResponse, userLoginDto } from "../../../types/user.types";
 
 export const userApi = api.injectEndpoints({
   endpoints: builder => ({

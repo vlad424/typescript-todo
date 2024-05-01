@@ -1,5 +1,5 @@
 import { IArrayTasks } from "../../types/redux_state";
-import { IDeletePost, IPutPost, IUpdatePost } from "../../types/rtk.types";
+import { IDeletePost, IPutArrayPosts, IPutPost, IUpdatePost } from "../../types/rtk.types";
 import { api } from "./api";
 
 export const todosApi = api.injectEndpoints({
@@ -8,11 +8,11 @@ export const todosApi = api.injectEndpoints({
       query: (id: number) => `/workspace/${id}`,
       providesTags: ['Todos'],
     }),
-    PutTodo: builder.mutation<null, IPutPost>({
-      query: (data: IPutPost) => ({
+    PutTodo: builder.mutation<null, IPutPost | IPutArrayPosts>({
+      query: (data: IPutPost | IPutArrayPosts) => ({
         method: 'POST',
         url: `/workspace/${data.id}`,
-        body: data.post
+        body: data
       }),
       invalidatesTags: () => [{type: 'Todos'}]
     }),
