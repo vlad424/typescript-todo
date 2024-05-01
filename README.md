@@ -25,19 +25,19 @@
   <li>Login page:</li>
 </ul>
 
-![login form](https://github.com/vlad424/typescript-todo/raw/main/image.png)
+![login form](https://github.com/vlad424/typescript-todo/assets/54576715/faa3f032-5231-4d08-b957-f14bc521d121)
 
 <ul>
   <li>Register page:</li>
 </ul>
 
-![register form](https://github.com/vlad424/typescript-todo/raw/main/image-1.png)
+![register form](https://github.com/vlad424/typescript-todo/assets/54576715/fa4c3ee8-52da-4262-bc7d-f6676a9e3b38)
 
 <ul>
   <li>Forgot password page: (doesn't work now)</li>
 </ul>
 
-![forgot password](https://github.com/vlad424/typescript-todo/raw/main/image-2.png)
+![forgot password](https://github.com/vlad424/typescript-todo/assets/54576715/67cd00d5-0034-4aa3-91ca-c3e8f9a34b04)
 
 <ul>
   <li>Workspace page:</li>
