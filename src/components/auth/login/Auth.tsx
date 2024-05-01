@@ -44,8 +44,14 @@ const Auth: React.FC = () => {
 
   return (
     <div className="auth">
-      <div className="auth-info-content">
-        
+      <div className="auth-info">
+        <div className="info-area">
+          <p className="info-text">Welcome to TypeScript Todo</p>
+          <p className="info-text info-ghost">Welcome to TypeScriptTodo</p>
+        </div>
+        <div className="auth-features">
+          
+        </div>
       </div>
 
       <div className="auth-form">

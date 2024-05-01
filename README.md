@@ -25,19 +25,19 @@
   <li>Login page:</li>
 </ul>
 
-![login form](image.png)
+![login form](https://github.com/vlad424/typescript-todo/raw/main/image.png)
 
 <ul>
   <li>Register page:</li>
 </ul>
 
-![register form](image-1.png)
+![register form](https://github.com/vlad424/typescript-todo/raw/main/image-1.png)
 
 <ul>
   <li>Forgot password page: (doesn't work now)</li>
 </ul>
 
-![forgot password](image-2.png)
+![forgot password](https://github.com/vlad424/typescript-todo/raw/main/image-2.png)
 
 <ul>
   <li>Workspace page:</li>

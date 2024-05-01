@@ -43,6 +43,14 @@ const Register = () => {
 
   return (
     <div className="register">
+      <div className="auth-info">
+        <div className="info-area">
+          <p className="info-text">Welcome to TypeScript Todo</p>
+          <p className="info-text info-ghost">Welcome to TypeScriptTodo</p>
+        </div>
+        <div className="auth-features"></div>
+      </div>
+      
       <div className="register-form">
         <HeaderForm header="Register now" />
         <section className="register-form-transfer">

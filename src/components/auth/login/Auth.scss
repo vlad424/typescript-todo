@@ -3,11 +3,51 @@
   height: 100%;
 
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   background-image: url(../../../assets/css/6032629.svg);
   background-size: contain ;
 }
+.auth-info {
+  margin-left: 20%;
+
+  color: #fff;
+  font-size: 32px;
+
+  position: relative;
+
+  &:before {
+    content: attr(data-style);
+    position: absolute;
+    left: -1.5rem;
+    color: transparent;
+    -webkit-text-stroke: 1px #ffffff50;
+    z-index: 0;
+  }
+}
+.info-text {
+  color: #fff;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+}
+.info-ghost {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, .25);
+  position: absolute;
+  user-select: none;
+  top: 45%;
+  left: -1vw;
+  transform: translateY(-50%)
+}
+.auth-features {
+  margin-top: 5vh;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px 0px 0px 20px;
+}
+
 .auth-form {
   width: 30vw;
   height: 100vh;

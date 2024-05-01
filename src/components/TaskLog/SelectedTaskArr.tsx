@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import Task from "../generic/Task";
@@ -25,9 +25,10 @@ const SelectedTaskArr = () => {
     (state) =>
       state.taskReducer.tasks.find((el) => el.id === ID_TASK)?.todos.at(-1)?.id
   );
+
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
 
-  const [putTodo] = usePutTodoMutation()
+  const [putTodo, {isSuccess, data}] = usePutTodoMutation()
 
   const createPost = async (data: string) => {
     const post: ITask = {
@@ -37,11 +38,11 @@ const SelectedTaskArr = () => {
         new Date().toLocaleDateString().toString() +
         " " +
         new Date().toLocaleTimeString().toString(),
-      id: lastId ? lastId + 1 : 0,
+      id: lastId === undefined ? 0 : lastId + 1,
       text_color: "#000",
     };
 
-    putTodo({
+    const   success_post : any  = await putTodo({
       post: {
         post,
         arrayName: NAME_ARRAY
@@ -49,7 +50,7 @@ const SelectedTaskArr = () => {
       id: await getUser().then((res) => res.id)
     })
 
-    return post;
+    return success_post.data;
   };
 
   const hu = () => {
@@ -60,6 +61,7 @@ const SelectedTaskArr = () => {
     if (blockType === "wrap") return "25%";
     else if (blockType === "nowrap") return "95%";
   };
+
   return (
     <section className="tasks-view" style={{ flexWrap: hu() }}>
       {selected_array?.todos.map((el) => {
