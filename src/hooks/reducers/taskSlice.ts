@@ -100,6 +100,11 @@ export const taskSlice = createSlice({
         ?.todos.splice(selected_arr, 1);
       state.selectedTaskID = -1;
     }, // reducer, delete current selected task in array of task
+    deleteArrayTasks(state, action: PayloadAction<number>) {
+      state.selectedTaskArrayID = 0
+
+      state.tasks = state.tasks.filter(el => el.id !== action.payload)
+    },
     swapAllTasks(state, action: PayloadAction<Array<IArrayTasks> >) {
       state.tasks = []
 

@@ -1,5 +1,5 @@
 import { IArrayTasks } from "../../types/redux_state";
-import { IDeletePost, IPutArrayPosts, IPutPost, IUpdatePost } from "../../types/rtk.types";
+import { IDeleteArrayPosts, IDeletePost, IPutArrayPosts, IPutPost, IUpdatePost } from "../../types/rtk.types";
 import { api } from "./api";
 
 export const todosApi = api.injectEndpoints({
@@ -17,7 +17,7 @@ export const todosApi = api.injectEndpoints({
       invalidatesTags: () => [{type: 'Todos'}]
     }),
     DeleteTodo: builder.mutation<null, IDeletePost>({
-      query: (data: IDeletePost) => ({
+      query: (data: IDeletePost | IDeleteArrayPosts) => ({
         method: 'DELETE',
         url: `/workspace/${data.id}`,
         body: data

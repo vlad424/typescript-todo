@@ -13,8 +13,9 @@ export interface IUpdatePost {
   id: number;
 }
 export interface IDeletePost {
-  todoId: number;
+  todoId: string;
   id: number;
+  action: string
 }
 
 // multiquery types
@@ -25,6 +26,12 @@ export interface IPutArrayPosts {
     id: number;
     todos: Array<ITask> | null
   }
+  id: number
+  action: string
+}
+
+export interface IDeleteArrayPosts {
+  todoId: string;
   id: number
   action: string
 }

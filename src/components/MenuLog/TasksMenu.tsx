@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
-import { useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
+import { useDeleteTodoMutation, useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
 
 const TasksMenu = () => {
   const {
@@ -11,6 +11,7 @@ const TasksMenu = () => {
     changeSelectedArray,
     swapAllTasks,
     changeSelectedTask,
+    deleteArrayTasks
   } = taskSlice.actions;
   const { changeViewBlock } = viewSlice.actions;
   const tasks = useAppSelector((state) => state.taskReducer.tasks);
@@ -29,6 +30,7 @@ const TasksMenu = () => {
 
   const dispatch = useAppDispatch();
   const [putTodo] = usePutTodoMutation()
+  const [deletePost] = useDeleteTodoMutation()
 
   const fetchData = async () => {
     let changedPosts: Array<IArrayTasks> | null = [];
@@ -65,10 +67,13 @@ const TasksMenu = () => {
         id: user!.id,
         action: "PUT_ARRAY"
       }
-      
     )
 
     dispatch(putArrayTask(inputValue))
+  }
+  const deleteTodoArray = (name: string, arrayId: number) => {
+    dispatch(deleteArrayTasks(arrayId))
+    deletePost({todoId: name, id: user!.id, action: "DELETE_ARRAY"})
   }
 
   useEffect(() => {
@@ -84,13 +89,14 @@ const TasksMenu = () => {
         ) : (
           tasks.map((el) => {
             return (
-              <div
-                className="menu-task"
-                key={`Task: ${el.id}`}
-                onClick={() => changeSelectedArrayFun(el.id)}
-              >
-                <p className="menu-name">{el.name}</p>
-                <p className="menu-value-tasks">{el.todos.length}</p>
+              <div className="menu-wrapper" key={`Task: ${el.id}`}>
+                <div
+                  className="menu-task"
+                  onClick={() => changeSelectedArrayFun(el.id)}
+                >
+                  <p className="menu-name">{el.name}</p>
+                </div>
+                <button className="menu-value-tasks" onClick={() => deleteTodoArray(el.name, el.id)}>{el.todos.length}</button>
               </div>
             );
           })

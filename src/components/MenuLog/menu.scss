@@ -29,6 +29,13 @@
 }
 /* middle */
 
+.menu-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
 .menu-tasks {
     display: flex;
     
@@ -73,6 +80,7 @@
 .menu-name {
     font-weight: normal;
 
+    cursor: pointer;
     background-color: #F3F3F3;
 }
 .menu-value-tasks {
@@ -87,6 +95,12 @@
 
     font-size: 12px;
     background-color: #EAEAEA;
+    transition: 0.4s;
+
+    &:hover {
+        background-color: #db0d58;
+        color: white;
+    }
 }
 .add-array {
     display: flex;

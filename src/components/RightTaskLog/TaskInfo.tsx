@@ -55,7 +55,7 @@ const TaskInfo: React.FC = () => {
           id: -1,
           text_color: "#000",
         };
-    deletePost({todoId: type_task.id, id: await getUser().then(res => res.id)})
+    deletePost({todoId: type_task.id.toString(), id: await getUser().then(res => res.id), action: "DELETE_TODO"})
     dispatch(deleteTask(type_task.id));
   };
 

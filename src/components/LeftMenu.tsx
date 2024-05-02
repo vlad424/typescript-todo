@@ -4,7 +4,7 @@ import HeaderMenu from "./MenuLog/HeaderMenu";
 import TasksMenu from "./MenuLog/TasksMenu";
 import ListMenu from "./MenuLog/ListMenu";
 
-import './MenuLog/menu.css'
+import './MenuLog/menu.scss'
 
 const LeftMenu = () => {
   return (
