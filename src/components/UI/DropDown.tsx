@@ -1,5 +1,5 @@
 import React from "react";
-import { IArrayTasks } from "../../types/redux_state";
+import { IArrayTasks, ITask } from "../../types/redux_state";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import styled from "styled-components";
@@ -12,20 +12,23 @@ const Label = styled.label`
 const DropDown = (dropdown_items: Array<IArrayTasks>) => {
   const dropdown_items_res = Object.values(dropdown_items);
 
-  const selectedTask = useAppSelector(state => state.taskReducer.selectedTaskID)
+  const selectedTaskId = useAppSelector(state => state.taskReducer.selectedTaskID)
+  const seletedArrayId = useAppSelector(state => state.taskReducer.selectedTaskArrayID)
+  const selectedTask = useAppSelector(state => state.taskReducer.tasks[seletedArrayId])
+
   const user = useAppSelector(state => state.taskReducer.User)
 
   const [transport] = useTransportTodoMutation()
 
-  const moveTaskClick = (arrayName : string) => {
-    transport({
+  const moveTaskClick = async (arrayName : string) => {
+    const task : any = await transport({
       userId: user!.id,
-      todoId: selectedTask,
+      todoId: selectedTaskId,
       nameArray: arrayName
     })
-
-
-    dispatch(moveTask(arrayName))
+    console.log(selectedTask.todos.find(el => el.id === selectedTaskID))
+    console.log(task.data)
+    dispatch(moveTask({task, arrayName}))
   }
 
   const { moveTask } = taskSlice.actions;

@@ -26,6 +26,12 @@ export interface ITaskSaveAction {
     desc: string,
     id: number
 }
+export interface IMoveTask {
+    task: {
+        data: ITask
+    }
+    arrayName: string
+}
 export interface IColorObjectAction {
     color: String,
     id: number

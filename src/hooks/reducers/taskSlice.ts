@@ -1,7 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, current } from "@reduxjs/toolkit";
 import {
   IArrayTasks,
   IColorObjectAction,
+  IMoveTask,
   ITask,
   ITaskSaveAction,
   IUser,
@@ -45,7 +46,7 @@ const initialState: ReduxState = {
   ],
 
   selectedTaskArrayID: 0,
-  selectedTaskID: 1,
+  selectedTaskID: 0,
 
   User: null,
   isLogined: false,
@@ -125,40 +126,35 @@ export const taskSlice = createSlice({
         change
       ].desc = action.payload.desc;
     },
-    moveTask(state, action: PayloadAction<String>) {
-      const moved_task = state.tasks
-        .find((el) => el.id === state.selectedTaskArrayID)!
-        .todos.find((el) => el.id === state.selectedTaskID);
+    moveTask(state, action: PayloadAction<IMoveTask>) {
+      const array = state.tasks.find(el => el.name === action.payload.arrayName)
+      const movedTask = action.payload.task.data
 
-      const lastId = state.tasks
-        .find((el) => el.id === state.selectedTaskArrayID)
-        ?.todos.at(-1)?.id;
-
-      state.tasks
-        .find((el) => el.name === action.payload)!
-        .todos.push(
-          moved_task
+      state.tasks[array!.id].todos.push(
+          movedTask
             ? {
-                name: moved_task.name,
-                desc: moved_task.desc,
-                date: moved_task.date,
-                id: lastId ? lastId + 1 : 0,
-                text_color: moved_task.text_color,
+                name: movedTask.name,
+                desc: movedTask.desc,
+                date: movedTask.date,
+                id: +movedTask.id,
+                text_color: movedTask.text_color,
               }
-            : { name: "", desc: "", date: "", id: 10000, text_color: "#000"}
+            : { name: "123", desc: "", date: "", id: 10000, text_color: "#000"}
         );
       const selected_arr: any = state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)
-        ?.todos.findIndex((el) => el.id === moved_task!.id)
+        ?.todos.findIndex((el) => el.id === movedTask!.id)
         ? state.tasks
             .find((el) => el.id === state.selectedTaskArrayID)
-            ?.todos.findIndex((el) => el.id === moved_task!.id)
+            ?.todos.findIndex((el) => el.id === movedTask!.id)
         : 0;
       state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)
         ?.todos.splice(selected_arr, 1);
 
       state.selectedTaskID = -1;
+
+      console.log(array)
     },
     changeTextColor(state, action: PayloadAction<IColorObjectAction>) {
       state.tasks
