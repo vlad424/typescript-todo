@@ -1,5 +1,5 @@
 import { IArrayTasks } from "../../types/redux_state";
-import { IDeleteArrayPosts, IDeletePost, IPutArrayPosts, IPutPost, IUpdatePost } from "../../types/rtk.types";
+import { IDeleteArrayPosts, IDeletePost, IPutArrayPosts, IPutPost, ITransportTodo, IUpdatePost } from "../../types/rtk.types";
 import { api } from "./api";
 
 export const todosApi = api.injectEndpoints({
@@ -31,6 +31,14 @@ export const todosApi = api.injectEndpoints({
         body: data.post
       }),
       invalidatesTags: () => [{type: 'Todos'}]
+    }),
+    TransportTodo: builder.mutation<null, ITransportTodo>({
+      query: (data : ITransportTodo) => ({
+        method: 'PATCH',
+        url: `/workspace/${data.userId}`,
+        body: data
+      }),
+      invalidatesTags: () => [{type: 'Todos'}]
     })
   })
 })
@@ -39,5 +47,6 @@ export const {
   useGetTodosQuery,
   usePutTodoMutation,
   useDeleteTodoMutation,
-  useUpdateTodoMutation
+  useUpdateTodoMutation,
+  useTransportTodoMutation
 } = todosApi

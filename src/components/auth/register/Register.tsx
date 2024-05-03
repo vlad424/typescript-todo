@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import HeaderForm from "../../generic/HeaderForm";
+import HeaderForm from "../../UI/HeaderForm";
 
 import './Register.scss'
 import { AuthService } from "../../../services/auth/auth.service";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { useAppDispatch } from "../../../hooks/redux";
 import { taskSlice } from "../../../hooks/reducers/taskSlice";
 import { getUser } from "../../../services/auth/auth.helper";
 

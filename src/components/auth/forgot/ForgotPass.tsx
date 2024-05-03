@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeaderForm from "../../generic/HeaderForm";
+import HeaderForm from "../../UI/HeaderForm";
 import { Link } from "react-router-dom";
 
 import "./ForgotPass.scss";

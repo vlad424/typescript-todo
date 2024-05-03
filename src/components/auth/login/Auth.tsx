@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import "./Auth.scss";
-import HeaderForm from "../../generic/HeaderForm";
+import HeaderForm from "../../UI/HeaderForm";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthService } from "../../../services/auth/auth.service";
 import { getUser } from "../../../services/auth/auth.helper";
 import { taskSlice } from "../../../hooks/reducers/taskSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { useAppDispatch } from "../../../hooks/redux";
 
 const Auth: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -26,8 +26,6 @@ const Auth: React.FC = () => {
         await isLogged()
       });
   };
-  const user = useAppSelector(state => state.taskReducer.User)
-
   const isLogged = async () => {
     if(Object.keys(await getUser().then((res) => res)).length !== 0) {
       const credentials = await getUser()

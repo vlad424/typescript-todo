@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { ITask } from "../../types/redux_state";
 
-import DropDown from "../generic/DropDown";
+import DropDown from "../UI/DropDown";
 import { CirclePicker } from "react-color";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
 import { getUser } from "../../services/auth/auth.helper";
@@ -30,7 +30,7 @@ const TaskInfo: React.FC = () => {
   const [deletePost] = useDeleteTodoMutation()
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
-  const { deleteTask, saveChangesTask, changeTextColor } = taskSlice.actions;
+  const { deleteTask, changeTextColor } = taskSlice.actions;
   const { changeViewBlock } = viewSlice.actions
   const [value_area, setValue_area] = useState(
     task?.desc ? task?.desc : "No description"

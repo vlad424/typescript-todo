@@ -29,6 +29,12 @@ export interface IPutArrayPosts {
   id: number
   action: string
 }
+export interface ITransportTodo {
+  todoId: number,
+  userId: number
+  nameArray: string
+}
+
 
 export interface IDeleteArrayPosts {
   todoId: string;

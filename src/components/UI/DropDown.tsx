@@ -3,6 +3,7 @@ import { IArrayTasks } from "../../types/redux_state";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import styled from "styled-components";
+import { useTransportTodoMutation } from "../../hooks/api-query/todos.api";
 
 const Label = styled.label`
   background-color: #f3f3f3;
@@ -10,6 +11,22 @@ const Label = styled.label`
 `;
 const DropDown = (dropdown_items: Array<IArrayTasks>) => {
   const dropdown_items_res = Object.values(dropdown_items);
+
+  const selectedTask = useAppSelector(state => state.taskReducer.selectedTaskID)
+  const user = useAppSelector(state => state.taskReducer.User)
+
+  const [transport] = useTransportTodoMutation()
+
+  const moveTaskClick = (arrayName : string) => {
+    transport({
+      userId: user!.id,
+      todoId: selectedTask,
+      nameArray: arrayName
+    })
+
+
+    dispatch(moveTask(arrayName))
+  }
 
   const { moveTask } = taskSlice.actions;
 
@@ -27,7 +44,7 @@ const DropDown = (dropdown_items: Array<IArrayTasks>) => {
       Move into: {' '}
       <select
         className={styleOff() ? "dropdown-menu" : "dropdown-menu disabled"}
-        onChange={(e) => dispatch(moveTask(e.target.value))}
+        onChange={(e) => moveTaskClick(e.target.value)}
       >
         {dropdown_items_res.map((el) => {
           return (
