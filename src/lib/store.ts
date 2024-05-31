@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import taskReducer from "../hooks/reducers/taskSlice";
 import viewReducer from "../hooks/reducers/viewSlice";
 import { api } from "../hooks/api-query/api";
+import listReducer  from "../hooks/reducers/listSlice";
 
 const rootReducer = combineReducers({
     taskReducer,
     viewReducer,
+    listReducer,
     [api.reducerPath]: api.reducer
 })
 

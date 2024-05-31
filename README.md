@@ -43,4 +43,5 @@
   <li>Workspace page:</li>
 </ul>
 
-![image](https://github.com/vlad424/typescript-todo/assets/54576715/8b3a1841-1e9f-41c0-92b3-aa69855bcd52)
+![image](https://github.com/vlad424/typescript-todo/assets/54576715/fd5a5ec4-9052-479b-8564-fa6ac061cea6)
+

@@ -4,6 +4,7 @@ import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
 import { useDeleteTodoMutation, useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
+import Loader from "../UI/loader/Loader";
 
 const TasksMenu = () => {
   const {
@@ -85,7 +86,7 @@ const TasksMenu = () => {
       <p className="menu-surname">TASKS</p>
       <div className="menu-current-tasks">
         {isLoading ? (
-          <div> Loading... </div>
+          <Loader/>
         ) : (
           tasks.map((el) => {
             return (
