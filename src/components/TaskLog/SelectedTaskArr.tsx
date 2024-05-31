@@ -66,7 +66,7 @@ const SelectedTaskArr = () => {
   return (
     <section className="tasks-view" style={{ flexWrap: hu() }}>
       {selected_array?.todos.map((el) => {
-        return <Task {...el} key={`MiddleTask: ${el.id}`} />;
+        return <Task {...el} key={`MiddleTask: ${el.id}`}/>;
       })}
       <div className="add-new-task" style={{ width: wc() }}>
         <button

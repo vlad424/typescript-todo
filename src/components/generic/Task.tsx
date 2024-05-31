@@ -43,7 +43,7 @@ const Task = (el: any) => {
 
   useEffect(() => {
     checker()
-  }, []) 
+  }, [])
 
   return (
       <ColoredTask 

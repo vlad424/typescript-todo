@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 import "./Auth.scss";
 import HeaderForm from "../../UI/HeaderForm";
@@ -7,6 +7,7 @@ import { AuthService } from "../../../services/auth/auth.service";
 import { getUser } from "../../../services/auth/auth.helper";
 import { taskSlice } from "../../../hooks/reducers/taskSlice";
 import { useAppDispatch } from "../../../hooks/redux";
+import gsap from "gsap";
 
 const Auth: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -14,7 +15,7 @@ const Auth: React.FC = () => {
 
   const { pushCurrentUser } = taskSlice.actions;
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const loginClick = async () => {
     const data = { login, password };
@@ -23,22 +24,26 @@ const Auth: React.FC = () => {
       .catch((e) => console.log(e))
       .then(async () => {
         dispatch(pushCurrentUser(await getUser()));
-        await isLogged()
+        await isLogged();
       });
   };
   const isLogged = async () => {
-    if(Object.keys(await getUser().then((res) => res)).length !== 0) {
-      const credentials = await getUser()
+    if (Object.keys(await getUser().then((res) => res)).length !== 0) {
+      const credentials = await getUser();
 
-      console.log(`/workspace/${+credentials.id}`)
+      console.log(`/workspace/${+credentials.id}`);
 
       dispatch(pushCurrentUser(await getUser()));
-      return navigate(`/workspace/${+credentials.id}`)
+      return navigate(`/workspace/${+credentials.id}`);
     }
   };
   useEffect(() => {
     isLogged();
-  }, [])
+  }, []);
+  useLayoutEffect(() => {
+    gsap.fromTo(".auth-form", { opacity: 0, x: -50 }, { opacity: 1, x: 0 })
+    gsap.fromTo(".auth-info", { y: 100}, { y: 0 });
+  }, []);
 
   return (
     <div className="auth">
@@ -47,13 +52,11 @@ const Auth: React.FC = () => {
           <p className="info-text">Welcome to TypeScript Todo</p>
           <p className="info-text info-ghost">Welcome to TypeScriptTodo</p>
         </div>
-        <div className="auth-features">
-          
-        </div>
+        <div className="auth-features"></div>
       </div>
 
       <div className="auth-form">
-        <HeaderForm header="Log in"/>
+        <HeaderForm header="Log in" />
         <section className="auth-form-transfer">
           <div className="auth-form-inputs">
             <input
