@@ -1,5 +1,8 @@
 export const getContentType = () => ({
-  "Content-Type": "application/json",
+  //"Content-Type": "application/json",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/x-www-form-urlencoded",
+
 });
 
 export const errorCatch = (error: any) : string => {
