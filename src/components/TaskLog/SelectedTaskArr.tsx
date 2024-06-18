@@ -15,8 +15,8 @@ const SelectedTaskArr = () => {
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
-  const NAME_ARRAY: string = useAppSelector(
-    (state) => state.taskReducer.tasks.find((el) => el.id === ID_TASK)!.name
+  const NAME_ARRAY = useAppSelector(
+    (state) => state.taskReducer.tasks.find((el) => el.id === ID_TASK)?.name
   );
   const selected_array = useAppSelector((state) =>
     state.taskReducer.tasks.find((el) => el.id === ID_TASK)
@@ -45,7 +45,7 @@ const SelectedTaskArr = () => {
     const success_post : any  = await putTodo({
       post: {
         post,
-        arrayName: NAME_ARRAY
+        arrayName: NAME_ARRAY!.toString()
       },
       id: await getUser().then((res) => res.id),
       action: "PUT_TODO"

@@ -10,6 +10,7 @@ import Register from "./components/auth/register/Register";
 import { taskSlice } from "./hooks/reducers/taskSlice";
 import { getUser } from "./services/auth/auth.helper";
 import { IUser } from "./types/redux_state";
+import ListPage from "./components/ListPage/ListPage";
 
 function App() {
   //local vars
@@ -53,7 +54,7 @@ function App() {
           />
           <Route
             path={`/workspace/${indentUser}/admin`}
-            element = {<div className="admin">xuy</div>}
+            element = {<ListPage/>}
           />
         </Routes>
       ); 

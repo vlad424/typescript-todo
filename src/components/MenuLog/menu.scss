@@ -132,9 +132,18 @@
 
 .menu-lists {
     display: flex;
+    flex-direction: column;
     
     min-height: 45%;
     flex-grow: 4;
+
+    background-color: #F3F3F3;
+}
+.menu-current-lists {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 5%; 
 
     background-color: #F3F3F3;
 }

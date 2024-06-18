@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import { IArrayTasks } from "../../types/redux_state";
 import { viewSlice } from "../../hooks/reducers/viewSlice";
 import { useDeleteTodoMutation, useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
 import Loader from "../UI/loader/Loader";
+import gsap, { TweenLite } from "gsap";
 
 const TasksMenu = () => {
   const {
@@ -46,6 +47,7 @@ const TasksMenu = () => {
         });
       }
       dispatch(swapAllTasks(changedPosts ? changedPosts : tasks));
+      if(changedPosts.length !== 0)
       if (changedPosts[0].todos.length > 0) {
         dispatch(changeSelectedTask(changedPosts[0].todos[0].id));
       }
@@ -79,6 +81,7 @@ const TasksMenu = () => {
 
   useEffect(() => {
     fetchData();
+    gsap.fromTo('.menu-wrapper', {opacity: 0, x: -10}, {opacity: 1, x: 0})
   }, [isLoading]);
 
   return (

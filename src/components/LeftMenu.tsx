@@ -12,6 +12,7 @@ const LeftMenu = () => {
       <HeaderMenu name="Menu"/>
       <TasksMenu/>
       <ListMenu/>
+      {/* exit */}
     </aside>
   );
 };

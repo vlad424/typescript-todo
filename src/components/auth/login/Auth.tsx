@@ -31,8 +31,6 @@ const Auth: React.FC = () => {
     if (Object.keys(await getUser().then((res) => res)).length !== 0) {
       const credentials = await getUser();
 
-      console.log(`/workspace/${+credentials.id}`);
-
       dispatch(pushCurrentUser(await getUser()));
       return navigate(`/workspace/${+credentials.id}`);
     }
