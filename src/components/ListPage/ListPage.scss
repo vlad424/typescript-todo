@@ -1,0 +1,18 @@
+.menu-admin-lists {
+  display: flex;
+  
+  min-height: 45%;
+  flex-grow: 4;
+  flex-direction: column;
+
+  background-color: #F3F3F3;
+}
+.menu-admin-posts {
+  display: flex;
+  flex-direction: column;
+  
+  min-height: 45%;
+  flex-grow: 4;
+
+  background-color: #F3F3F3;
+}

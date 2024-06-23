@@ -54,7 +54,11 @@ function App() {
           />
           <Route
             path={`/workspace/${indentUser}/admin`}
-            element = {<ListPage/>}
+            element = {
+            <main className="App">
+              <ListPage/>
+            </main>
+            }
           />
           <Route
           path="/"

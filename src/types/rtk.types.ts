@@ -1,4 +1,4 @@
-import { ITask } from "./redux_state";
+import { IArrayTasks, ITask } from "./redux_state";
 
 export interface IPost {
   post: ITask;
@@ -49,4 +49,38 @@ export interface IPutPost {
   };
   id: number;
   action: string
+}
+
+export interface IGetListsAndTasks {
+  adminLists: Array<IAdminListArray>
+  users: Array<{
+    first_name: string
+    last_name: string
+    login: string
+    email: string
+    role: string
+    posts: Array<IAdminListArray>
+    id: number
+  }>
+}
+
+export interface IAdminListArray {
+  id: number,
+  name: string,
+  userId: number | null,
+  addressee: Array<number> | Array<never>
+  lists: Array<IAdminList>
+}
+export interface IAdminList {
+  id: number,
+  name: string,
+  desc: string,
+  dateCreate: string,
+  dateAt: string,
+  text_color: string
+}
+export interface IPutListOrComment {
+  id: number,
+  action: 'PUT LIST' | 'PUT COMMENT'
+  data: string
 }

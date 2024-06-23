@@ -3,19 +3,24 @@ import taskReducer from "../hooks/reducers/taskSlice";
 import viewReducer from "../hooks/reducers/viewSlice";
 import { api } from "../hooks/api-query/api";
 import listReducer  from "../hooks/reducers/listSlice";
+import { adminApi } from "../hooks/api-query/admin-api/admin-api";
 
 const rootReducer = combineReducers({
     taskReducer,
     viewReducer,
     listReducer,
-    [api.reducerPath]: api.reducer
+    [api.reducerPath]: api.reducer,
+    [adminApi.reducerPath]: adminApi.reducer
 })
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(api.middleware),
+            getDefaultMiddleware().concat(
+                api.middleware,
+                adminApi.middleware
+            ),
     })
 }
 
