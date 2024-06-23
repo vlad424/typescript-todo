@@ -56,6 +56,14 @@ function App() {
             path={`/workspace/${indentUser}/admin`}
             element = {<ListPage/>}
           />
+          <Route
+          path="/"
+          element={
+            <main className="App">
+              <Auth />
+            </main>
+          }
+        />
         </Routes>
       ); 
     }
@@ -72,6 +80,14 @@ function App() {
               </main>
             }
           />
+          <Route
+          path="/"
+          element={
+            <main className="App">
+              <Auth />
+            </main>
+          }
+        />
         </Routes>
       ); 
     }

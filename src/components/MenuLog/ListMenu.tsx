@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { Link } from "react-router-dom";
+import gsap from 'gsap'
 
 const ListMenu = () => {
   const lists = useAppSelector((state) => state.listReducer.lists);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  useLayoutEffect(() => {
+    gsap.fromTo('.menu-current-lists', {opacity: 0, x: -10}, {opacity: 1, x: 0})
+  }, [])
 
   return (
     <section className="menu-lists">

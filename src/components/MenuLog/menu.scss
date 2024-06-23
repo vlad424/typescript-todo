@@ -146,4 +146,8 @@
     margin-left: 5%; 
 
     background-color: #F3F3F3;
+    
+    & > a {
+        font-weight: normal;
+    }
 }

@@ -5,6 +5,7 @@ import TasksMenu from "./MenuLog/TasksMenu";
 import ListMenu from "./MenuLog/ListMenu";
 
 import './MenuLog/menu.scss'
+import { Link } from "react-router-dom";
 
 const LeftMenu = () => {
   return (
@@ -12,7 +13,10 @@ const LeftMenu = () => {
       <HeaderMenu name="Menu"/>
       <TasksMenu/>
       <ListMenu/>
-      {/* exit */}
+      <Link 
+        to={"/"}
+        onClick={() => localStorage.removeItem('user')}  
+      >Выйти из аккаунта</Link>
     </aside>
   );
 };

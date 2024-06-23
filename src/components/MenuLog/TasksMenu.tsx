@@ -81,7 +81,7 @@ const TasksMenu = () => {
 
   useEffect(() => {
     fetchData();
-    gsap.fromTo('.menu-wrapper', {opacity: 0, x: -10}, {opacity: 1, x: 0})
+    gsap.fromTo('.menu-current-tasks', {opacity: 0, x: -10}, {opacity: 1, x: 0})
   }, [isLoading]);
 
   return (
