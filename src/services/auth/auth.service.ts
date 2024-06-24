@@ -3,6 +3,7 @@ import { getContentType } from "../../api/api.helper"
 import { saveToStorage } from "./auth.helper"
 import { TokensResponse, userLoginDto, userRegisterDto } from "../../types/user.types"
 import { instance } from "../../api/api.interceptor"
+import axios from "axios"
 
 export const AuthService = {
   async login(data: userLoginDto) {

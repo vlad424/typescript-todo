@@ -11,6 +11,9 @@ export const listSlice = createSlice({
   reducers: {
     setList(state, action: PayloadAction<IAdminListArray | {}>) {
       state.currentList = action.payload
+    },
+    pushElToList(state, action: PayloadAction<any>) {
+      (state.currentList as IAdminListArray).lists.push(action.payload)
     }
   }
 })

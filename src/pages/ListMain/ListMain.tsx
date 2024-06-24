@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import HeaderTask from "../../components/TaskLog/HeaderTask";
 
 import "./ListMain.scss";
-import { useAppSelector } from "../../hooks/redux";
-import { IAdminListArray } from "../../types/rtk.types";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { IAdminList, IAdminListArray } from "../../types/rtk.types";
 import List from "../../components/generic/List";
 import { useGetListsAndTasksQuery, usePutListOrCommentMutation } from "../../hooks/api-query/admin-api/admin-api";
+import { listSlice } from "../../hooks/reducers/listSlice";
 
 const ListMain = () => {
   const currentList: IAdminListArray | {} = useAppSelector(
@@ -13,7 +14,8 @@ const ListMain = () => {
   );
   const userId = useAppSelector(state => state.taskReducer.User!.id)
 
-  const response = useGetListsAndTasksQuery(userId)
+  const { setList, pushElToList } = listSlice.actions
+  const dispatch = useAppDispatch()
 
   const [putList] = usePutListOrCommentMutation()
 
@@ -30,7 +32,9 @@ const ListMain = () => {
 
   return (
     <section className="middle-list-area">
-      <header className="lists-header">{JSON.stringify(currentList) !== "{}" ? `${(currentList as IAdminListArray).name}` :  'Выберете список'}</header>
+      <header className="lists-header">
+        <h1>{JSON.stringify(currentList) !== "{}" ? `${(currentList as IAdminListArray).name}` :  'Выберете список'}</h1>
+      </header>
       <section className="list-view">
         {JSON.stringify(currentList) !== "{}" ? (
           (currentList as IAdminListArray).lists.map((list) => {
@@ -41,8 +45,12 @@ const ListMain = () => {
         )}
         <div className="add-new-task" style={{ width: wc() }}>
           <button className="task-view-add"
-            onClick={() => {
-              if(name !== '') putList({action: 'PUT LIST EL', data: {name: name, listId: (currentList as IAdminListArray).id}, id: 0})
+            onClick={ async () => {
+              if(name !== '') {
+                const res : any = await putList({action: 'PUT LIST EL', data: {name: name, listId: (currentList as IAdminListArray).id}, id: 0})
+
+                dispatch(pushElToList(res.data.list))
+              }
             }}
           >+</button>
           <input

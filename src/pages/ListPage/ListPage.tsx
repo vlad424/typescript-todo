@@ -18,8 +18,8 @@ const ListPage = () => {
 
   const response = useGetListsAndTasksQuery(userId);
 
-  const { setList } = listSlice.actions
-  const dispatch = useAppDispatch()
+  const { setList } = listSlice.actions;
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -42,12 +42,12 @@ const ListPage = () => {
                   <button
                     className="menu-value-tasks"
                     onClick={() => {
-                      dispatch(setList({}))
+                      dispatch(setList({}));
                       deleteList({
                         action: "DELETE LIST",
                         data: list.id,
                         id: userId,
-                      })
+                      });
                     }}
                   >
                     {list.lists.length}
@@ -80,13 +80,15 @@ const ListPage = () => {
         </section>
         <section className="menu-admin-posts">
           <p className="menu-surname">COMMENT POST</p>
-          {response.currentData?.users.map((user) => {
-            return (
-              <div className="user" key={`user-${user.id}`}>
-                {user.email}
-              </div>
-            );
-          })}
+          <div className="menu-current-posts">
+            {response.currentData?.users.map((user) => {
+              return (
+                <div className="user" key={`user-${user.id}`}>
+                  {user.email}
+                </div>
+              );
+            })}
+          </div>
         </section>
       </aside>
     </>

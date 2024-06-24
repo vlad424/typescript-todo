@@ -11,6 +11,8 @@ import { taskSlice } from "./hooks/reducers/taskSlice";
 import { getUser } from "./services/auth/auth.helper";
 import ListPage from "./pages/ListPage/ListPage";
 import ListMain from "./pages/ListMain/ListMain";
+import ListControl from "./pages/ListControl/ListControl";
+import { AuthService } from "./services/auth/auth.service";
 
 function App() {
   //local vars
@@ -58,6 +60,7 @@ function App() {
             <main className="App">
               <ListPage/>
               <ListMain/>
+              <ListControl/>
             </main>
             }
           />
