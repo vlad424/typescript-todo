@@ -1,13 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { viewSlice } from '../../hooks/reducers/viewSlice';
+import { listSlice } from '../../hooks/reducers/listSlice';
 
 const ColoredTask = styled.div<{ $text_color?: String }>`
   color: ${(props): any => props.$text_color};
 `;
 
 const List = (el: any) => {
+  const dispatch = useAppDispatch();
+  const { changeViewBlock, changeHeight } = viewSlice.actions
+  
   const blockRef = useRef<HTMLInputElement>(null)
+  const blockHeight = useAppSelector(state => state.viewReducer.height)
   const blockType = useAppSelector(state => state.viewReducer.wrap)
 
   const hu = () => {
@@ -15,12 +21,40 @@ const List = (el: any) => {
     else if(blockType === 'nowrap') return '95%'
   }
 
+  const { setElList } = listSlice.actions
+
+  const checker = () => {
+    if(blockRef.current !== null) 
+    if(blockHeight === 0) {
+      const payload = {
+        width: blockRef.current.getBoundingClientRect().width,
+        height: blockRef.current.getBoundingClientRect().height,
+      }
+
+      blockRef.current ? dispatch(changeHeight(payload)) : console.log()
+    }
+    else if(blockHeight > blockRef.current.getBoundingClientRect().height) {
+      const payload = {
+        width: blockRef.current.getBoundingClientRect().width,
+        height: blockRef.current.getBoundingClientRect().height,
+      }
+      dispatch(changeViewBlock(payload))
+    }
+  }
+
+  useEffect(() => {
+    checker()
+  }, [])
+
   return (
     <ColoredTask 
         style={{width: hu()}}
         ref={blockRef}
         $text_color={el.text_color}
         className="task"
+        onClick={() => {
+          dispatch(setElList(el))
+        }}
       >
         {el.name}
       </ColoredTask>

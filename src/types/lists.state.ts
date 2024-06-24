@@ -1,6 +1,7 @@
-import { IAdminListArray } from "./rtk.types"
+import { IAdminList, IAdminListArray } from "./rtk.types"
 
 export interface IListsState {
   //lists: Array<IAdminList> | [],
-  currentList: IAdminListArray | {}
+  currentList: IAdminListArray | {},
+  currentElList: IAdminList | {}
 }

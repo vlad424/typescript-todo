@@ -89,6 +89,16 @@ export interface IPutListOrComment {
 }
 export interface IDeleteListOrComment {
   id: number,
-  action: 'DELETE LIST' | 'DELETE COMMENT'
+  action: 'DELETE LIST' | 'DELETE COMMENT' | 'DELETE LIST EL' 
   data: number
+}
+export interface IPatchList {
+  userId: number,
+  listId: number,
+  data: {
+    desc: string,
+    dateAt: string,
+    text_color: string,
+    userIdAddr: Array<number>
+  }
 }
