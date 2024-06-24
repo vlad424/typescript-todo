@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import gsap from 'gsap'
 
 const ListMenu = () => {
-  const lists = useAppSelector((state) => state.listReducer.lists);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   useLayoutEffect(() => {
@@ -20,9 +19,7 @@ const ListMenu = () => {
         </div>
       ) : (
         <div className="menu-current-lists">
-          {lists?.map((el) => {
-            return <div key={el.name + "_id"}>{el.name}</div>;
-          })}
+          1
         </div>
       )}
     </section>

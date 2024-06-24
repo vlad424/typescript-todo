@@ -9,8 +9,8 @@ import ForgotPass from "./components/auth/forgot/ForgotPass";
 import Register from "./components/auth/register/Register";
 import { taskSlice } from "./hooks/reducers/taskSlice";
 import { getUser } from "./services/auth/auth.helper";
-import { IUser } from "./types/redux_state";
-import ListPage from "./components/ListPage/ListPage";
+import ListPage from "./pages/ListPage/ListPage";
+import ListMain from "./pages/ListMain/ListMain";
 
 function App() {
   //local vars
@@ -57,6 +57,7 @@ function App() {
             element = {
             <main className="App">
               <ListPage/>
+              <ListMain/>
             </main>
             }
           />

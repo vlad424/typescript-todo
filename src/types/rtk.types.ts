@@ -81,6 +81,14 @@ export interface IAdminList {
 }
 export interface IPutListOrComment {
   id: number,
-  action: 'PUT LIST' | 'PUT COMMENT'
-  data: string
+  action: 'PUT LIST' | 'PUT COMMENT' | 'PUT LIST EL'
+  data: string | {
+    name: string,
+    listId: number
+  }
+}
+export interface IDeleteListOrComment {
+  id: number,
+  action: 'DELETE LIST' | 'DELETE COMMENT'
+  data: number
 }

@@ -1,20 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IListsState } from "../../types/lists.state";
+import { IAdminListArray } from "../../types/rtk.types";
 
 const initialState : IListsState = {
-  lists: [
-    {
-      id: 0,
-      name: "hello",
-      list: []
-    }
-  ]
+  currentList: {}
 }
 export const listSlice = createSlice({
   name: 'slices',
   initialState,
   reducers: {
-
+    setList(state, action: PayloadAction<IAdminListArray | {}>) {
+      state.currentList = action.payload
+    }
   }
 })
 

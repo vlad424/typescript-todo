@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IGetListsAndTasks, IPutListOrComment } from "../../../types/rtk.types";
+import { IDeleteListOrComment, IGetListsAndTasks, IPutListOrComment } from "../../../types/rtk.types";
 
 export const adminApi = createApi({
   reducerPath: 'admin-api',
@@ -20,11 +20,23 @@ export const adminApi = createApi({
         }
       }),
       invalidatesTags: ['admin']
+    }),
+    DeleteListOrComment: builder.mutation<null, IDeleteListOrComment>({
+      query: (req: IDeleteListOrComment) => ({
+        method: 'DELETE',
+        url: `/workspace/${req.id}/admin`,
+        body: {
+          action: req.action,
+          data: req.data
+        }
+      }),
+      invalidatesTags: ['admin']
     })
   })
 })
 
 export const {
   useGetListsAndTasksQuery,
-  usePutListOrCommentMutation
+  usePutListOrCommentMutation,
+  useDeleteListOrCommentMutation
 } = adminApi

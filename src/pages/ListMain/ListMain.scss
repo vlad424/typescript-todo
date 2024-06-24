@@ -1,0 +1,11 @@
+.middle-list-area {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 40%;
+  padding: 1.5%;
+}
+.list-view {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
