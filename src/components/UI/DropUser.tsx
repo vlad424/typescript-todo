@@ -27,19 +27,20 @@ export default function DropUser() {
 
   const userId = useAppSelector((state) => state.taskReducer.User!.id);
 
-  const { setUserShare } = listSlice.actions
+  const { setUserShare } = listSlice.actions;
   const { data, isLoading } = useGetListsAndTasksQuery(userId);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const handleChange = (event: any) => {
     const {
       target: { value },
     } = event;
     setPersonName(typeof value === "string" ? value.split(",") : value);
-    dispatch(setUserShare(typeof value === "string" ? value.split(",") : value))
+    dispatch(
+      setUserShare(typeof value === "string" ? value.split(",") : value)
+    );
   };
 
   return (
@@ -56,16 +57,18 @@ export default function DropUser() {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {isLoading !== true ?
+          {isLoading !== true ? (
             data!.users.map((name) => (
               <MenuItem key={name.email} value={name.email}>
                 <Checkbox checked={personName.indexOf(name as never) > -1} />
                 <ListItemText primary={name.email} />
               </MenuItem>
             ))
-            :
-            <></>
-          }
+          ) : (
+            <MenuItem key={"okey"} value={"okey"}>
+              <ListItemText primary={"okey"} />
+            </MenuItem>
+          )}
         </Select>
       </FormControl>
     </div>

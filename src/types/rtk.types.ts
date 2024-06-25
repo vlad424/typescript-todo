@@ -65,6 +65,7 @@ export interface IGetListsAndTasks {
 }
 
 export interface IAdminListArray {
+  map(arg0: (el: any) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   id: number,
   name: string,
   userId: number | null,

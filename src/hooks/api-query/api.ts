@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IArrayTasks } from '../../types/redux_state'
+import { IAdminListArray } from '../../types/rtk.types'
 
 export const api = createApi({
   reducerPath: 'api',
-  tagTypes: ['Todos'],
+  tagTypes: ['Todos', 'Lists'],
   baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_baseURL}),
   endpoints: (builder) => ({
     // GetTodos: builder.mutation<{data: Array<IArrayTasks>}, number>({
@@ -17,5 +18,9 @@ export const api = createApi({
       query: (id: number) => `/workspace/${id}`,
       providesTags: ['Todos'],
     }),
+    GetUserLists: builder.query<IAdminListArray, number>({
+      query: (userId : number) => `/workspace/${userId}/lists`,
+      providesTags: ['Lists']
+    })
   }),
 })
