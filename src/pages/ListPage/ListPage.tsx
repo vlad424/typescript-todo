@@ -25,7 +25,7 @@ const ListPage = () => {
     <>
       <aside className="left-menu">
         <header className="menu-header">
-          <h2>Menu</h2>
+          <h2>Admin Menu</h2>
         </header>
         <section className="menu-admin-lists">
           <p className="menu-surname">CREATE LIST</p>

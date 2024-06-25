@@ -99,6 +99,6 @@ export interface IPatchList {
     desc: string,
     dateAt: string,
     text_color: string,
-    userIdAddr: Array<number>
+    userIdAddr: Array<string>
   }
 }

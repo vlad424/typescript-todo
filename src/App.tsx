@@ -17,31 +17,30 @@ import { AuthService } from "./services/auth/auth.service";
 function App() {
   //local vars
   const isLogined = useAppSelector((state) => state.taskReducer.isLogined);
-  let userR = useAppSelector(state => state.taskReducer.User)
+  let userR = useAppSelector((state) => state.taskReducer.User);
 
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const [indentUser, setIndentUser] = useState(0)
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [indentUser, setIndentUser] = useState(0);
 
-  const { pushCurrentUser } = taskSlice.actions
+  const { pushCurrentUser } = taskSlice.actions;
 
   const isLogged = async () => {
-    if(Object.keys(await getUser().then((res) => res)).length !== 0) {
-      
-      const user = await getUser()
-      userR = user
+    if (Object.keys(await getUser().then((res) => res)).length !== 0) {
+      const user = await getUser();
+      userR = user;
 
       dispatch(pushCurrentUser(user));
-      setIndentUser(indentUser => indentUser = user.id)
+      setIndentUser((indentUser) => (indentUser = user.id));
     }
   };
 
   useEffect(() => {
     isLogged();
-  }, [isLogined])
+  }, [isLogined]);
 
   if (isLogined === true) {
-    if(userR!.role === 'admin') {
+    if (userR!.role === "admin") {
       return (
         <Routes>
           <Route
@@ -56,26 +55,55 @@ function App() {
           />
           <Route
             path={`/workspace/${indentUser}/admin`}
-            element = {
-            <main className="App">
-              <ListPage/>
-              <ListMain/>
-              <ListControl/>
-            </main>
+            element={
+              <main className="App">
+                <ListPage />
+                <ListMain />
+                <ListControl />
+              </main>
             }
           />
           <Route
-          path="/"
-          element={
-            <main className="App">
-              <Auth />
-            </main>
-          }
-        />
+            path="/"
+            element={
+              <main className="App">
+                <Auth />
+              </main>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <main className="App">
+                <Auth />
+              </main>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <main className="App">
+                {" "}
+                <Register />{" "}
+              </main>
+            }
+          />
+          <Route
+            path="/login/access-token"
+            element={<main className="App"></main>}
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <main className="App">
+                {" "}
+                <ForgotPass />{" "}
+              </main>
+            }
+          />
         </Routes>
-      ); 
-    }
-    else {
+      );
+    } else {
       return (
         <Routes>
           <Route
@@ -89,18 +117,47 @@ function App() {
             }
           />
           <Route
-          path="/"
-          element={
-            <main className="App">
-              <Auth />
-            </main>
-          }
-        />
+            path="/"
+            element={
+              <main className="App">
+                <Auth />
+              </main>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <main className="App">
+                <Auth />
+              </main>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <main className="App">
+                {" "}
+                <Register />{" "}
+              </main>
+            }
+          />
+          <Route
+            path="/login/access-token"
+            element={<main className="App"></main>}
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <main className="App">
+                {" "}
+                <ForgotPass />{" "}
+              </main>
+            }
+          />
         </Routes>
-      ); 
+      );
     }
-  } 
-  else {
+  } else {
     return (
       <Routes>
         <Route

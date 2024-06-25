@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { CirclePicker } from "react-color";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { IAdminList } from "../../types/rtk.types";
-import { useDeleteListOrCommentMutation, useUpdateListMutation } from "../../hooks/api-query/admin-api/admin-api";
+import { useDeleteListOrCommentMutation, useGetListsAndTasksQuery, useUpdateListMutation } from "../../hooks/api-query/admin-api/admin-api";
 import { listSlice } from "../../hooks/reducers/listSlice";
+import DropUser from "../../components/UI/DropUser";
 
 const ListControl = () => {
   const colors_picker = [
@@ -37,7 +38,7 @@ const ListControl = () => {
         desc: "Выберете лист",
         dateCreate: "-",
         dateAt: "-",
-        text_color: "#fff",
+        text_color: "#000",
       };
   };
   const userId = useAppSelector((state) => state.taskReducer.User!.id);
@@ -45,27 +46,36 @@ const ListControl = () => {
   const [enable, setEnable] = useState(true);
   const [dateAt, setDateAt] = useState(returnTryObj().dateAt);
   const [color, setColor] = useState(returnTryObj().text_color)
-  useEffect(() => {
-    checker();
-  });
 
-  const handleUpdateClick = () => {
-    const res = patchList({
+  const handleUpdateClick = async () => {
+    const res : any = await patchList({
       userId: userId,
       listId: returnTryObj().id,
       data: {
         desc: value_area,
         dateAt: dateAt,
         text_color: color,
-        userIdAddr: []
+        userIdAddr: users
       }
     })
+    dispatch(setElList(res.data.data.updateListEl))
+    dispatch(changeElInList(res.data.data.updateListEl))
   }
 
   const dispatch = useAppDispatch();
-  const { clearElList } = listSlice.actions;
+  const { clearElList, setElList, changeElInList } = listSlice.actions;
   const [deleteListEl] = useDeleteListOrCommentMutation();
   const [patchList] = useUpdateListMutation()
+
+  const users = useAppSelector(state => state.listReducer.userShare)
+
+  useEffect(() => {
+    checker();
+    returnTryObj()
+
+    setValue_area(returnTryObj().desc)
+    setDateAt(returnTryObj().dateAt)
+  }, [currentElList]);
 
   return (
     <aside className="right-side">
@@ -120,6 +130,7 @@ const ListControl = () => {
             color={returnTryObj().text_color}
             onChange={(color) => colorHandler(color)}
           />
+          <DropUser/>
         </div>
       </div>
       <div className="side-task-commit-changes">
