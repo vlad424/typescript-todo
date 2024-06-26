@@ -43,7 +43,8 @@ export const todosApi = api.injectEndpoints({
     GetUserLists: builder.query<IAdminListArray, number>({
       query: (userId : number) => `/workspace/${userId}/lists`,
       providesTags: ['Lists']
-    })
+    }),
+    
   })
 })
 
@@ -54,5 +55,5 @@ export const {
   useUpdateTodoMutation,
   useTransportTodoMutation,
 
-  useGetUserListsQuery
+  useGetUserListsQuery,
 } = todosApi

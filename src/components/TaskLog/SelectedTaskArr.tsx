@@ -5,13 +5,15 @@ import Task from "../generic/Task";
 import { getUser } from "../../services/auth/auth.helper";
 import { ITask } from "../../types/redux_state";
 import { usePutTodoMutation } from "../../hooks/api-query/todos.api";
+import { IAdminListArray } from "../../types/rtk.types";
+import List from "../generic/List";
 
 const SelectedTaskArr = () => {
   const [name, setName] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const { putTask } = taskSlice.actions;
-  
+
   const ID_TASK: number = useAppSelector(
     (state) => state.taskReducer.selectedTaskArrayID
   );
@@ -28,7 +30,7 @@ const SelectedTaskArr = () => {
 
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
 
-  const [putTodo, {isSuccess, data}] = usePutTodoMutation()
+  const [putTodo, { isSuccess, data }] = usePutTodoMutation();
 
   const createPost = async (data: string) => {
     const post: ITask = {
@@ -42,14 +44,14 @@ const SelectedTaskArr = () => {
       text_color: "#000",
     };
 
-    const success_post : any  = await putTodo({
+    const success_post: any = await putTodo({
       post: {
         post,
-        arrayName: NAME_ARRAY!.toString()
+        arrayName: NAME_ARRAY!.toString(),
       },
       id: await getUser().then((res) => res.id),
-      action: "PUT_TODO"
-    })
+      action: "PUT_TODO",
+    });
 
     return success_post.data;
   };
@@ -63,29 +65,41 @@ const SelectedTaskArr = () => {
     else if (blockType === "nowrap") return "95%";
   };
 
+  const list = useAppSelector((state) => state.listReducer.currentList);
+
   return (
     <section className="tasks-view" style={{ flexWrap: hu() }}>
-      {selected_array?.todos.map((el) => {
-        return <Task {...el} key={`MiddleTask: ${el.id}`}/>;
-      })}
-      <div className="add-new-task" style={{ width: wc() }}>
-        <button
-          className="task-view-add"
-          onClick={async () => {
-            name
-              ? dispatch(putTask(await createPost(name)))
-              : console.log("incorrect name");
-          }}
-        >
-          +
-        </button>
-        <input
-          className="task-input"
-          placeholder="add new task"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
+      {Object.keys(list).length === 0 ? (
+        <>
+          {selected_array?.todos.map((el) => {
+            return <Task {...el} key={`MiddleTask: ${el.id}`} />;
+          })}
+          <div className="add-new-task" style={{ width: wc() }}>
+            <button
+              className="task-view-add"
+              onClick={async () => {
+                name
+                  ? dispatch(putTask(await createPost(name)))
+                  : console.log("incorrect name");
+              }}
+            >
+              +
+            </button>
+            <input
+              className="task-input"
+              placeholder="add new task"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          {(list as IAdminListArray).lists.map((list) => {
+            return <List {...list} key={`MiddleList: ${list.id}`} />;
+          })}
+        </>
+      )}
     </section>
   );
 };

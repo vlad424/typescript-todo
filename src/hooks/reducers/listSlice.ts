@@ -17,7 +17,7 @@ export const listSlice = createSlice({
     pushElToList(state, action: PayloadAction<any>) {
       (state.currentList as IAdminListArray).lists.push(action.payload)
     },
-    setElList(state, action: PayloadAction<IAdminList>) {
+    setElList(state, action: PayloadAction<IAdminList | {}>) {
       state.currentElList = action.payload
     },
     clearElList(state, action: PayloadAction<any>) {

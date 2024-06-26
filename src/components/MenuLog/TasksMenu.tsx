@@ -6,6 +6,7 @@ import { viewSlice } from "../../hooks/reducers/viewSlice";
 import { useDeleteTodoMutation, useGetTodosQuery, usePutTodoMutation } from "../../hooks/api-query/todos.api";
 import Loader from "../UI/loader/Loader";
 import gsap, { TweenLite } from "gsap";
+import { listSlice } from "../../hooks/reducers/listSlice";
 
 const TasksMenu = () => {
   const {
@@ -15,6 +16,10 @@ const TasksMenu = () => {
     changeSelectedTask,
     deleteArrayTasks
   } = taskSlice.actions;
+  const {
+    setList,
+    setElList
+  } = listSlice.actions
   const { changeViewBlock } = viewSlice.actions;
   const tasks = useAppSelector((state) => state.taskReducer.tasks);
   const user = useAppSelector((state) => state.taskReducer.User);
@@ -54,6 +59,8 @@ const TasksMenu = () => {
     }
   };
   const changeSelectedArrayFun = (id: number) => {
+    dispatch(setList({}))
+    dispatch(setElList({}))
     dispatch(changeSelectedArray(id));
 
     if (selected_array!.todos.length < 7) {
@@ -96,7 +103,11 @@ const TasksMenu = () => {
               <div className="menu-wrapper" key={`Task: ${el.id}`}>
                 <div
                   className="menu-task"
-                  onClick={() => changeSelectedArrayFun(el.id)}
+                  onClick={
+                    () => {
+                      changeSelectedArrayFun(el.id)
+                    }
+                  }
                 >
                   <p className="menu-name">{el.name}</p>
                 </div>

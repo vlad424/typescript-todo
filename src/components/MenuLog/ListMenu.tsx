@@ -1,9 +1,10 @@
 import React, { useLayoutEffect } from "react";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { useGetUserListsQuery } from "../../hooks/api-query/todos.api";
 import { IAdminListArray } from "../../types/rtk.types";
+import { listSlice } from "../../hooks/reducers/listSlice";
 
 const ListMenu = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -17,6 +18,9 @@ const ListMenu = () => {
   }, []);
 
   const { data, isLoading } = useGetUserListsQuery(user.id);
+
+  const dispatch = useAppDispatch()
+  const { setList } = listSlice.actions
 
   return (
     <section className="menu-lists">
@@ -35,7 +39,9 @@ const ListMenu = () => {
                 <div className="menu-wrapper" key={`Task: ${el.id}`}>
                   <div
                     className="menu-task"
-                    //onClick={() => changeSelectedArrayFun(el.id)}
+                    onClick={() => {
+                      dispatch(setList(el))
+                    }}
                   >
                     <p className="menu-name">{el.name}</p>
                   </div>
