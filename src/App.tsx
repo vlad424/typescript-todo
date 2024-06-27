@@ -4,7 +4,7 @@ import RightTaskDesc from "./components/RightTaskDesc";
 import Task from "./components/Task";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import Auth from "./components/auth/login/Auth";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ForgotPass from "./components/auth/forgot/ForgotPass";
 import Register from "./components/auth/register/Register";
 import { taskSlice } from "./hooks/reducers/taskSlice";
@@ -12,7 +12,6 @@ import { getUser } from "./services/auth/auth.helper";
 import ListPage from "./pages/ListPage/ListPage";
 import ListMain from "./pages/ListMain/ListMain";
 import ListControl from "./pages/ListControl/ListControl";
-import { AuthService } from "./services/auth/auth.service";
 
 function App() {
   //local vars
@@ -20,7 +19,6 @@ function App() {
   let userR = useAppSelector((state) => state.taskReducer.User);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [indentUser, setIndentUser] = useState(0);
 
   const { pushCurrentUser } = taskSlice.actions;

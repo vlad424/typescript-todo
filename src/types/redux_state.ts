@@ -21,6 +21,7 @@ export interface ITask {
     date: String,
     id: number
     text_color: String;
+    comment: { message: string }
 }
 export interface ITaskSaveAction {
     desc: string,

@@ -37,7 +37,7 @@ const TaskInfo: React.FC = () => {
 
   const dropdown_items = useAppSelector((state) => state.taskReducer.tasks);
   const { deleteTask, changeTextColor } = taskSlice.actions;
-  const { setElList } = listSlice.actions
+  const { setElList } = listSlice.actions;
   const { changeViewBlock } = viewSlice.actions;
   const [value_area, setValue_area] = useState(
     task?.desc ? task?.desc : "No description"
@@ -61,6 +61,7 @@ const TaskInfo: React.FC = () => {
           date: new Date().toLocaleDateString + new Date().toLocaleTimeString(),
           id: -1,
           text_color: "#000",
+          comment: { message: "Нет комментария" },
         };
     deletePost({
       todoId: type_task.id.toString(),
@@ -154,7 +155,12 @@ const TaskInfo: React.FC = () => {
                 color={task?.text_color.toString()}
                 onChange={(color) => colorHandler(color)}
               />
-              <div className="comment-area">{}</div>
+              <div
+                className="comment-area"
+                style={{ marginTop: "20px", flexDirection: "column" }}
+              >
+                Комментарий от руководителя: <p>{task?.comment?.message}</p>
+              </div>
             </div>
           </div>
           <div className="side-task-commit-changes">
@@ -187,19 +193,11 @@ const TaskInfo: React.FC = () => {
                 value={returnTryObj().desc}
               ></textarea>
               <ul className="side-task-date-menu">
-                <li
-                  className= "side-task-menu-item"
-                >
-                  Date of creation:{" "}
-                </li>
+                <li className="side-task-menu-item">Date of creation: </li>
                 <li className="side-task-menu-item">
                   {returnTryObj().dateCreate}
                 </li>
-                <li
-                  className="side-task-menu-item"
-                >
-                  Date of end:{" "}
-                </li>
+                <li className="side-task-menu-item">Date of end: </li>
                 <li className="side-task-menu-item">{returnTryObj().dateAt}</li>
               </ul>
             </div>
@@ -213,7 +211,7 @@ const TaskInfo: React.FC = () => {
                   data: returnTryObj().id,
                   id: await getUser().then((res) => res.id),
                 });
-                dispatch(setElList({}))
+                dispatch(setElList({}));
               }}
             >
               Сделано

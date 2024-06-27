@@ -8,7 +8,6 @@ import {
   usePutListOrCommentMutation,
 } from "../../hooks/api-query/admin-api/admin-api";
 import { listSlice } from "../../hooks/reducers/listSlice";
-import { ITask } from "../../types/redux_state";
 
 const ListPage = () => {
   const [inputValue, setInputValue] = useState("");

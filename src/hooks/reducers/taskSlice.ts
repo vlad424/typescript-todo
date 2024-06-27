@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice, current } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   IArrayTasks,
   IColorObjectAction,
@@ -24,6 +24,7 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           id: 1,
           text_color: "#000",
+          comment: {message: ''}
         },
       ],
     },
@@ -40,6 +41,7 @@ const initialState: ReduxState = {
             new Date().toLocaleTimeString().toString(),
           id: 1,
           text_color: "#000",
+          comment: {message: ''}
         },
       ],
     },
@@ -138,8 +140,9 @@ export const taskSlice = createSlice({
                 date: movedTask.date,
                 id: +movedTask.id,
                 text_color: movedTask.text_color,
+                comment: movedTask.comment
               }
-            : { name: "123", desc: "", date: "", id: 10000, text_color: "#000"}
+            : { name: "123", desc: "", date: "", id: 10000, text_color: "#000", comment: {message: 'Отсутсвует'}}
         );
       const selected_arr: any = state.tasks
         .find((el) => el.id === state.selectedTaskArrayID)

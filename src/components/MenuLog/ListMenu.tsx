@@ -1,9 +1,8 @@
 import React, { useLayoutEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { useGetUserListsQuery } from "../../hooks/api-query/todos.api";
-import { IAdminListArray } from "../../types/rtk.types";
 import { listSlice } from "../../hooks/reducers/listSlice";
 
 const ListMenu = () => {

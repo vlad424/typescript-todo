@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from "react";
-import HeaderTask from "../../components/TaskLog/HeaderTask";
-
+import React, { useState } from "react";
 import "./ListMain.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { IAdminList, IAdminListArray } from "../../types/rtk.types";
+import { IAdminListArray } from "../../types/rtk.types";
 import List from "../../components/generic/List";
-import {
-  useGetListsAndTasksQuery,
-  usePutListOrCommentMutation,
-} from "../../hooks/api-query/admin-api/admin-api";
+import { usePutListOrCommentMutation } from "../../hooks/api-query/admin-api/admin-api";
 import { listSlice } from "../../hooks/reducers/listSlice";
-import SelectedTaskArr from "../../components/TaskLog/SelectedTaskArr";
-import Task from "../../components/Task";
+import { usePostCommentMutation } from "../../hooks/api-query/todos.api";
 
 const ListMain = () => {
   const currentList: IAdminListArray | {} = useAppSelector(
     (state) => state.listReducer.currentList
   );
-  const userId = useAppSelector((state) => state.taskReducer.User!.id);
   const selectedTasks = useAppSelector(
     (state) => state.listReducer.selectedTasks
   );
+  const userId = useAppSelector((state) => state.taskReducer.User!.id);
 
-  const { setList, pushElToList } = listSlice.actions;
+  const { pushElToList } = listSlice.actions;
   const dispatch = useAppDispatch();
 
   const [putList] = usePutListOrCommentMutation();
+  const [sendComment] = usePostCommentMutation();
 
   const [name, setName] = useState<string>("");
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
@@ -87,12 +82,29 @@ const ListMain = () => {
           selectedTasks?.map((el) => {
             return (
               <div
-                style={{ width: hu(), color: el.text_color.toString(), flexDirection: 'column' }}
+                key={`idk now ${el.id}`}
+                style={{
+                  width: hu(),
+                  color: el.text_color.toString(),
+                  flexDirection: "column",
+                }}
                 className="task"
               >
                 {el.name}
                 <br />
-                <input type="text" placeholder="Введите комменатрий"/>
+                <button
+                  style={{color: 'black'}}
+                  onClick={() => {
+                    sendComment({
+                      message: "sended",
+                      userId: userId,
+                      address: 1,
+                    });
+                  }}
+                >
+                  +
+                </button>
+                <input type="text" placeholder={el?.comment?.message ? el?.comment?.message : "Введите комменатрий" }/>
               </div>
             );
           })

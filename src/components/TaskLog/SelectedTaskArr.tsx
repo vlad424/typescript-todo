@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { taskSlice } from "../../hooks/reducers/taskSlice";
 import Task from "../generic/Task";
@@ -30,7 +30,7 @@ const SelectedTaskArr = () => {
 
   const blockType = useAppSelector((state) => state.viewReducer.wrap);
 
-  const [putTodo, { isSuccess, data }] = usePutTodoMutation();
+  const [putTodo] = usePutTodoMutation();
 
   const createPost = async (data: string) => {
     const post: ITask = {
@@ -42,6 +42,7 @@ const SelectedTaskArr = () => {
         new Date().toLocaleTimeString().toString(),
       id: lastId === undefined ? 0 : lastId + 1,
       text_color: "#000",
+      comment: {message: 'Нет комментария'}
     };
 
     const success_post: any = await putTodo({

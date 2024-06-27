@@ -44,7 +44,17 @@ export const todosApi = api.injectEndpoints({
       query: (userId : number) => `/workspace/${userId}/lists`,
       providesTags: ['Lists']
     }),
-    
+    PostComment: builder.mutation<null, {userId : number, message: string, address: number  }>({
+      query: (data : {userId : number, message: string, address: number }) => ({
+        method: 'POST',
+        url: `/workspace/${data.userId}/lists`,
+        body: {
+          msg: data.message,
+          addr: data.address
+        }
+      }),
+      invalidatesTags: ['Lists']
+    })
   })
 })
 
@@ -56,4 +66,5 @@ export const {
   useTransportTodoMutation,
 
   useGetUserListsQuery,
+  usePostCommentMutation
 } = todosApi
