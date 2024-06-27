@@ -154,6 +154,7 @@ const TaskInfo: React.FC = () => {
                 color={task?.text_color.toString()}
                 onChange={(color) => colorHandler(color)}
               />
+              <div className="comment-area">{}</div>
             </div>
           </div>
           <div className="side-task-commit-changes">

@@ -5,7 +5,8 @@ import { IAdminList, IAdminListArray } from "../../types/rtk.types";
 const initialState : IListsState = {
   currentList: {},
   currentElList: {},
-  userShare: []
+  userShare: [],
+  selectedTasks: [],
 }
 export const listSlice = createSlice({
   name: 'slices',
@@ -43,6 +44,9 @@ export const listSlice = createSlice({
     },
     setUserShare(state, action : PayloadAction<Array<string>>) {
       state.userShare = action.payload
+    },
+    setCurrentTasks(state, action) {
+      state.selectedTasks = action.payload
     }
   }
 })

@@ -10,12 +10,17 @@ import {
   usePutListOrCommentMutation,
 } from "../../hooks/api-query/admin-api/admin-api";
 import { listSlice } from "../../hooks/reducers/listSlice";
+import SelectedTaskArr from "../../components/TaskLog/SelectedTaskArr";
+import Task from "../../components/Task";
 
 const ListMain = () => {
   const currentList: IAdminListArray | {} = useAppSelector(
     (state) => state.listReducer.currentList
   );
   const userId = useAppSelector((state) => state.taskReducer.User!.id);
+  const selectedTasks = useAppSelector(
+    (state) => state.listReducer.selectedTasks
+  );
 
   const { setList, pushElToList } = listSlice.actions;
   const dispatch = useAppDispatch();
@@ -79,7 +84,18 @@ const ListMain = () => {
             />
           </div>
         ) : (
-          <></>
+          selectedTasks?.map((el) => {
+            return (
+              <div
+                style={{ width: hu(), color: el.text_color.toString(), flexDirection: 'column' }}
+                className="task"
+              >
+                {el.name}
+                <br />
+                <input type="text" placeholder="Введите комменатрий"/>
+              </div>
+            );
+          })
         )}
       </section>
     </section>

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "./ListPage.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -8,6 +8,7 @@ import {
   usePutListOrCommentMutation,
 } from "../../hooks/api-query/admin-api/admin-api";
 import { listSlice } from "../../hooks/reducers/listSlice";
+import { ITask } from "../../types/redux_state";
 
 const ListPage = () => {
   const [inputValue, setInputValue] = useState("");
@@ -18,8 +19,20 @@ const ListPage = () => {
 
   const response = useGetListsAndTasksQuery(userId);
 
-  const { setList } = listSlice.actions;
+  const { setList, setCurrentTasks } = listSlice.actions;
   const dispatch = useAppDispatch();
+
+  const renderTasksUserById = (id: number) => {
+    const posts : any = response.currentData?.users.find(x => x.id === id)
+    let all_todos : any = [];
+
+    for(let i = 0; i < posts?.posts.length; i++) {
+      posts?.posts[i].todos.map((el: any) => all_todos.push(el))
+    }
+
+    
+    return all_todos
+  }
 
   return (
     <>
@@ -83,7 +96,9 @@ const ListPage = () => {
           <div className="menu-current-posts">
             {response.currentData?.users.map((user) => {
               return (
-                <div className="user" key={`user-${user.id}`}>
+                <div className="user" key={`user-${user.id}`} onClick={() => {
+                  dispatch(setCurrentTasks(renderTasksUserById(user.id)))
+                }}>
                   {user.email}
                 </div>
               );
