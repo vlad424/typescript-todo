@@ -96,15 +96,26 @@ const ListMain = () => {
                   style={{color: 'black'}}
                   onClick={() => {
                     sendComment({
-                      message: "sended",
+                      message: "👍",
                       userId: userId,
                       address: 1,
                     });
                   }}
                 >
-                  +
+                  {'👍'}
                 </button>
-                <input type="text" placeholder={el?.comment?.message ? el?.comment?.message : "Введите комменатрий" }/>
+                <button
+                  style={{color: 'black'}}
+                  onClick={() => {
+                    sendComment({
+                      message: "👎",
+                      userId: userId,
+                      address: 1,
+                    });
+                  }}
+                >
+                  {'👎'}
+                </button>
               </div>
             );
           })
