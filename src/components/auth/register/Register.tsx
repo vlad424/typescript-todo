@@ -35,7 +35,7 @@ const Register = () => {
 
       dispatch(pushCurrentUser(await getUser()));
 
-      console.log(credentials.id)
+      console.log(credentials)
 
       return navigate(`/workspace/${credentials.id}`)
     }

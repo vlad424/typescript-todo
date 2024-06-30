@@ -47,27 +47,27 @@ const Auth: React.FC = () => {
     <div className="auth">
       <div className="auth-info">
         <div className="info-area">
-          <p className="info-text">Welcome to TypeScript Todo</p>
-          <p className="info-text info-ghost">Welcome to TypeScriptTodo</p>
+          <p className="info-text">Приложение TypeScript Todo</p>
+          <p className="info-text info-ghost">Приложение TypeScriptTodo</p>
         </div>
         <div className="auth-features"></div>
       </div>
 
       <div className="auth-form">
-        <HeaderForm header="Log in" />
+        <HeaderForm header="Войти в аккаунт" />
         <section className="auth-form-transfer">
           <div className="auth-form-inputs">
             <input
               type="text"
               className="login"
-              placeholder="login"
+              placeholder="Ваш логин"
               value={login}
               onChange={(e) => setLogin((login) => (login = e.target.value))}
             />
             <input
               type="password"
               className="password"
-              placeholder="password"
+              placeholder="Ваш пароль"
               value={password}
               onChange={(e) =>
                 setPassword((password) => (password = e.target.value))
@@ -76,16 +76,16 @@ const Auth: React.FC = () => {
           </div>
           <div className="auth-form-continue">
             <button className="send-to-check" onClick={() => loginClick()}>
-              Continue
+              Войти
             </button>
           </div>
         </section>
         <footer className="auth-form-footer">
           <Link to="forgot-password" className="forgot-password">
-            forgot password
+            Забыли пароль?
           </Link>
           <Link to="/register" className="create-account">
-            create account
+            Создать аккаунт
           </Link>
         </footer>
       </div>
