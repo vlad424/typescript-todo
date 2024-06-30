@@ -81,7 +81,6 @@ const ListMain = () => {
           </div>
         ) : (
           selectedTasks?.map((el) => {
-            console.log(el)
             return (
               <div
                 key={`idk now ${el.id}`}
@@ -100,7 +99,7 @@ const ListMain = () => {
                     sendComment({
                       message: "👍",
                       userId: userId,
-                      address: workerId,
+                      address: el.id,
                     });
                   }}
                 >
@@ -112,7 +111,7 @@ const ListMain = () => {
                     sendComment({
                       message: "👎",
                       userId: userId,
-                      address: workerId,
+                      address: el.id,
                     });
                   }}
                 >
