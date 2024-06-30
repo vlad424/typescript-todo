@@ -7,6 +7,7 @@ const initialState : IListsState = {
   currentElList: {},
   userShare: [],
   selectedTasks: [],
+  currentWorker: 0
 }
 export const listSlice = createSlice({
   name: 'slices',
@@ -47,6 +48,9 @@ export const listSlice = createSlice({
     },
     setCurrentTasks(state, action) {
       state.selectedTasks = action.payload
+    },
+    setCurrentWorker(state, action) {
+      state.currentWorker = action.payload
     }
   }
 })

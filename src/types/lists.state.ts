@@ -6,5 +6,6 @@ export interface IListsState {
   currentList: IAdminListArray | {},
   currentElList: IAdminList | {},
   userShare: Array<string>,
-  selectedTasks: Array<ITask>
+  selectedTasks: Array<ITask>,
+  currentWorker: number
 }

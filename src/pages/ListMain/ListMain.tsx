@@ -15,6 +15,7 @@ const ListMain = () => {
     (state) => state.listReducer.selectedTasks
   );
   const userId = useAppSelector((state) => state.taskReducer.User!.id);
+  const workerId = useAppSelector((state) => state.listReducer.currentWorker);
 
   const { pushElToList } = listSlice.actions;
   const dispatch = useAppDispatch();
@@ -80,6 +81,7 @@ const ListMain = () => {
           </div>
         ) : (
           selectedTasks?.map((el) => {
+            console.log(el)
             return (
               <div
                 key={`idk now ${el.id}`}
@@ -98,7 +100,7 @@ const ListMain = () => {
                     sendComment({
                       message: "👍",
                       userId: userId,
-                      address: 1,
+                      address: workerId,
                     });
                   }}
                 >
@@ -110,7 +112,7 @@ const ListMain = () => {
                     sendComment({
                       message: "👎",
                       userId: userId,
-                      address: 1,
+                      address: workerId,
                     });
                   }}
                 >

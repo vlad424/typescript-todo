@@ -18,7 +18,7 @@ const ListPage = () => {
 
   const response = useGetListsAndTasksQuery(userId);
 
-  const { setList, setCurrentTasks } = listSlice.actions;
+  const { setList, setCurrentTasks, setCurrentWorker } = listSlice.actions;
   const dispatch = useAppDispatch();
 
   const renderTasksUserById = (id: number) => {
@@ -97,6 +97,7 @@ const ListPage = () => {
               return (
                 <div className="user" key={`user-${user.id}`} onClick={() => {
                   dispatch(setCurrentTasks(renderTasksUserById(user.id)))
+                  dispatch(setCurrentWorker(user.id))
                 }}>
                   {user.email}
                 </div>
